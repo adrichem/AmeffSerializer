@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Adrichem.Serialization.Ameff</PackageId>
+    <Authors>Gerben van Adrichemzer</Authors>
+    <PackageLicenseUrl>https://github.com/adrichem/AmeffSerializer/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/adrichem/AmeffSerializer/</PackageProjectUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <RepositoryUrl>https://github.com/adrichem/AmeffSerializer.git</RepositoryUrl>
+    <PackageTags>ameff,serialize,deserialize</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Serialize and deserialize ArchiMate Model Exchange File Format files.</Description>
+  </PropertyGroup>
+
+</Project>
