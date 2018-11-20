@@ -11,6 +11,14 @@
     <PackageTags>ameff,serialize,deserialize</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Serialize and deserialize ArchiMate Model Exchange File Format files.</Description>
+    <Version>1.1.0</Version>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="archimate3_Diagram.xsd" />
+    <None Remove="archimate3_Model.xsd" />
+    <None Remove="archimate3_View.xsd" />
+  </ItemGroup>
 
 </Project>
