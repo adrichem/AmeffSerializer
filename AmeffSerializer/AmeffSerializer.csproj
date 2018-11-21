@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Adrichem.Serialization.Ameff</PackageId>
-    <Authors>Gerben van Adrichemzer</Authors>
+    <Authors>Gerben van Adrichem</Authors>
     <PackageLicenseUrl>https://github.com/adrichem/AmeffSerializer/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/adrichem/AmeffSerializer/</PackageProjectUrl>
     <PackageIconUrl></PackageIconUrl>
@@ -11,8 +11,8 @@
     <PackageTags>ameff,serialize,deserialize</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Serialize and deserialize ArchiMate Model Exchange File Format files.</Description>
-    <Version>1.1.0</Version>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <Version>1.1.1</Version>
+    <AssemblyVersion>1.1.1.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

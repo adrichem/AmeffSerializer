@@ -1,24 +1,42 @@
 # AmeffSerializer
-Serialize and deserialize ArchiMate Model Exchange File Format files (AMEFF). 
-
-Supports V2.1 and V3.0 (including viewpoints and diagrams)
+Serialize and deserialize ArchiMate Model Exchange File Format files (AMEFF). Supports V2.1 and V3.0.
 
 ## Deserialization example
 ```csharp
 using Adrichem.Serialization.Ameff.V3
 
-var Serializer = new XmlSerializer(typeof(ModelType));
-var myV3Ameff = Serializer.Deserialize(new StreamReader(@".\ArchiSurance V3.xml")) as ModelType;
+void Deserialize()
+{
+	string file = @"C:\temp\ArchiSurance V3.xml";
+	ModelType MyAmeff;
 
-myV3Ameff
-	.elements
-	.Select(el => el.name.First().Value )
-	.ForEach(name => System.Console.WriteLine(name))
-;	
-myV3Ameff
-	.views
-	.diagrams
-	.Select(d => d.name.First().Value)
-	.ForEach(name => System.Console.WriteLine(name))
-;	
+	XmlSchemaSet Schemas = new XmlSchemaSet();
+	Schemas.Add(null, "http://www.opengroup.org/xsd/archimate/3.0/archimate3_Diagram.xsd");
+	Schemas.Add("http://purl.org/dc/elements/1.1/", "http://dublincore.org/schemas/xmls/qdc/2008/02/11/dc.xsd");
+
+	var MyXmlReaderSettings = new XmlReaderSettings
+	{
+		Schemas = Schemas,
+		ValidationType = ValidationType.Schema,
+		ValidationFlags = XmlSchemaValidationFlags.ProcessIdentityConstraints |
+						  XmlSchemaValidationFlags.ReportValidationWarnings
+	};
+
+	using (var Reader = new StreamReader(file))
+	{
+		using (var XmlRdr = XmlReader.Create(Reader, MyXmlReaderSettings))
+		{
+			MyAmeff = new XmlSerializer(typeof(ModelType))
+				.Deserialize(XmlRdr)
+				as ModelType;
+
+			MyAmeff
+				.views
+				.diagrams
+				.Select(d => d.name.FirstOrDefault())
+				.Dump()
+			;
+		}
+	}
+}
 ```
