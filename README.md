@@ -1,5 +1,5 @@
 # AmeffSerializer
-Serialize and deserialize ArchiMate Model Exchange File Format files (AMEFF). Supports V2.1 and V3.0.
+Serialize and deserialize ArchiMate Model Exchange File Format files (AMEFF). Supports V2.1, V3.0 and v3.1.
 
 ## Deserialization example
 ```csharp
