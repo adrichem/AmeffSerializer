@@ -1,7 +1,7 @@
 ﻿namespace AmeffSerializer.V31.Diagram
 {
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class RGBColorType
     {
 
@@ -15,7 +15,7 @@
         private byte _a;
         #endregion
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttribute()]
         public byte r
         {
             get
@@ -28,7 +28,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttribute()]
         public byte g
         {
             get
@@ -41,7 +41,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttribute()]
         public byte b
         {
             get
@@ -54,7 +54,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttribute()]
         public byte a
         {
             get

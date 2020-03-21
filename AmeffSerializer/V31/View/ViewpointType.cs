@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
 
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class ViewpointType : NamedReferenceableType
     {
 
@@ -32,7 +32,7 @@
             this._properties = new List<PropertyType>();
         }
 
-        [System.Xml.Serialization.XmlArrayItemAttribute("property", IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItem("property", IsNullable = false)]
         public List<PropertyType> properties
         {
             get
@@ -45,7 +45,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("concern")]
+        [System.Xml.Serialization.XmlElement("concern")]
         public List<ConcernType> concern
         {
             get
@@ -82,7 +82,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("allowedElementType")]
+        [System.Xml.Serialization.XmlElement("allowedElementType")]
         public List<AllowedElementTypeType> allowedElementType
         {
             get
@@ -95,7 +95,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("allowedRelationshipType")]
+        [System.Xml.Serialization.XmlElement("allowedRelationshipType")]
         public List<AllowedRelationshipTypeType> allowedRelationshipType
         {
             get
@@ -108,7 +108,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("modelingNote")]
+        [System.Xml.Serialization.XmlElement("modelingNote")]
         public List<ModelingNoteType> modelingNote
         {
             get

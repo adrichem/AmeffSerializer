@@ -3,8 +3,8 @@
     using System.Collections.Generic;
 
 
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class SchemaInfoType
     {
 
@@ -45,7 +45,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        [System.Xml.Serialization.XmlAnyElement()]
         public List<System.Xml.XmlElement> Any
         {
             get

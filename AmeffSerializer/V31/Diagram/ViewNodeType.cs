@@ -2,11 +2,11 @@
 {
     using System.Collections.Generic;
 
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Container))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Element))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Label))]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Xml.Serialization.XmlInclude(typeof(Container))]
+    [System.Xml.Serialization.XmlInclude(typeof(Element))]
+    [System.Xml.Serialization.XmlInclude(typeof(Label))]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ViewNodeType : ViewConceptType
     {
 
@@ -27,7 +27,7 @@
             this._anyAttr1 = new List<System.Xml.XmlAttribute>();
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "nonNegativeInteger")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "nonNegativeInteger")]
         public string x
         {
             get
@@ -40,7 +40,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "nonNegativeInteger")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "nonNegativeInteger")]
         public string y
         {
             get
@@ -53,7 +53,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "positiveInteger")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "positiveInteger")]
         public string w
         {
             get
@@ -66,7 +66,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "positiveInteger")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "positiveInteger")]
         public string h
         {
             get
@@ -79,7 +79,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        [System.Xml.Serialization.XmlAnyAttribute()]
         public List<System.Xml.XmlAttribute> AnyAttr1
         {
             get

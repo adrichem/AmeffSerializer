@@ -3,8 +3,8 @@
     using System.Collections.Generic;
 
 
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class ModelingNoteType
     {
 
@@ -19,7 +19,7 @@
             this._documentation = new List<PreservedLangStringType>();
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("documentation")]
+        [System.Xml.Serialization.XmlElement("documentation")]
         public List<PreservedLangStringType> documentation
         {
             get
@@ -32,7 +32,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttribute()]
         public string type
         {
             get

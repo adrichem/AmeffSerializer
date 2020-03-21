@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
 
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class StakeholderType
     {
 
@@ -16,7 +16,7 @@
             this._label = new List<LangStringType>();
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("label")]
+        [System.Xml.Serialization.XmlElement("label")]
         public List<LangStringType> label
         {
             get

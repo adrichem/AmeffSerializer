@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
 
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class PropertyType
     {
 
@@ -18,7 +18,7 @@
             this._value = new List<LangStringType>();
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("value")]
+        [System.Xml.Serialization.XmlElement("value")]
         public List<LangStringType> value
         {
             get
@@ -31,7 +31,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "IDREF")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
         public string propertyDefinitionRef
         {
             get

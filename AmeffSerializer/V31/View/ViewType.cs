@@ -3,9 +3,9 @@
     using System.Collections.Generic;
 
 
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Diagram.Diagram))]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Xml.Serialization.XmlInclude(typeof(Diagram.Diagram))]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ViewType : NamedReferenceableType
     {
 
@@ -22,7 +22,7 @@
             this._properties = new List<PropertyType>();
         }
 
-        [System.Xml.Serialization.XmlArrayItemAttribute("property", IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItem("property", IsNullable = false)]
         public List<PropertyType> properties
         {
             get
@@ -35,7 +35,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttribute()]
         public string viewpoint
         {
             get
@@ -48,7 +48,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "IDREF")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
         public string viewpointRef
         {
             get

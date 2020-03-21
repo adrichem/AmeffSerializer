@@ -5,9 +5,9 @@
     using View;
     using System.Collections.Generic;
     
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
-    [System.Xml.Serialization.XmlRootAttribute("model", Namespace = "http://www.opengroup.org/xsd/archimate/3.0/", IsNullable = false)]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Xml.Serialization.XmlRoot("model", Namespace = "http://www.opengroup.org/xsd/archimate/3.0/", IsNullable = false)]
     public partial class ModelType : NamedReferenceableType
     {
 
@@ -40,7 +40,7 @@
             this._properties = new List<PropertyType>();
         }
 
-        [System.Xml.Serialization.XmlArrayItemAttribute("property", IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItem("property", IsNullable = false)]
         public List<PropertyType> properties
         {
             get
@@ -65,7 +65,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlArrayItemAttribute("element", IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItem("element", IsNullable = false)]
         public List<ElementType> elements
         {
             get
@@ -78,7 +78,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlArrayItemAttribute("relationship", IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItem("relationship", IsNullable = false)]
         public List<RelationshipType> relationships
         {
             get
@@ -91,7 +91,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", typeof(OrganizationType), IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItem("item", typeof(OrganizationType), IsNullable = false)]
         public List<OrganizationType> organizations
         {
             get
@@ -104,7 +104,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlArrayItemAttribute("propertyDefinition", IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItem("propertyDefinition", IsNullable = false)]
         public List<PropertyDefinitionType> propertyDefinitions
         {
             get
@@ -129,7 +129,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttribute()]
         public string version
         {
             get

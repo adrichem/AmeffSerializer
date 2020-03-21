@@ -1,7 +1,7 @@
 ﻿namespace AmeffSerializer.V31.View
 {
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class AllowedElementTypeType
     {
 
@@ -9,7 +9,7 @@
         private string _type;
         #endregion
 
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttribute()]
         public string type
         {
             get

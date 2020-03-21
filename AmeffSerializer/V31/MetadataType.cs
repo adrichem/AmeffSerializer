@@ -1,7 +1,7 @@
 ﻿namespace AmeffSerializer.V31
 {
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class MetadataType
     {
 
@@ -11,11 +11,11 @@
         private ItemsChoiceType[] _itemsElementName;
         #endregion
 
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        [System.Xml.Serialization.XmlElementAttribute("schema", typeof(string))]
-        [System.Xml.Serialization.XmlElementAttribute("schemaInfo", typeof(SchemaInfoType))]
-        [System.Xml.Serialization.XmlElementAttribute("schemaversion", typeof(string))]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
+        [System.Xml.Serialization.XmlAnyElement()]
+        [System.Xml.Serialization.XmlElement("schema", typeof(string))]
+        [System.Xml.Serialization.XmlElement("schemaInfo", typeof(SchemaInfoType))]
+        [System.Xml.Serialization.XmlElement("schemaversion", typeof(string))]
+        [System.Xml.Serialization.XmlChoiceIdentifier("ItemsElementName")]
         public object[] Items
         {
             get
@@ -28,8 +28,8 @@
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        [System.Xml.Serialization.XmlElement("ItemsElementName")]
+        [System.Xml.Serialization.XmlIgnore()]
         public ItemsChoiceType[] ItemsElementName
         {
             get

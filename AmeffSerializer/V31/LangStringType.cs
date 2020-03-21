@@ -1,8 +1,8 @@
 ﻿namespace AmeffSerializer.V31
 {
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PreservedLangStringType))]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Xml.Serialization.XmlInclude(typeof(PreservedLangStringType))]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class LangStringType
     {
 
@@ -12,7 +12,7 @@
         private string _value;
         #endregion
 
-        [System.Xml.Serialization.XmlAttributeAttribute(Form = System.Xml.Schema.XmlSchemaForm.Qualified, Namespace = "http://www.w3.org/XML/1998/namespace")]
+        [System.Xml.Serialization.XmlAttribute(Form = System.Xml.Schema.XmlSchemaForm.Qualified, Namespace = "http://www.w3.org/XML/1998/namespace")]
         public string lang
         {
             get
@@ -25,7 +25,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlTextAttribute()]
+        [System.Xml.Serialization.XmlText()]
         public string Value
         {
             get

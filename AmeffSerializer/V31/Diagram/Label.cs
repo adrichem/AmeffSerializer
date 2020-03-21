@@ -1,7 +1,7 @@
 ﻿namespace AmeffSerializer.V31.Diagram
 {
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class Label : ViewNodeType
     {
 
@@ -11,7 +11,7 @@
         private string _xpathPart;
         #endregion
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "IDREF")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
         public string conceptRef
         {
             get
@@ -24,7 +24,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "token")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "token")]
         public string xpathPart
         {
             get

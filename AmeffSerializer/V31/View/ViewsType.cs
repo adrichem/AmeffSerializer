@@ -3,8 +3,8 @@
     using Diagram;
     using System.Collections.Generic;
 
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class ViewsType
     {
 
@@ -20,7 +20,7 @@
             this._viewpoints = new List<ViewpointType>();
         }
 
-        [System.Xml.Serialization.XmlArrayItemAttribute("viewpoint", IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItem("viewpoint", IsNullable = false)]
         public List<ViewpointType> viewpoints
         {
             get
@@ -33,7 +33,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlArrayItemAttribute("view", IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItem("view", IsNullable = false)]
         public List<Diagram> diagrams
         {
             get

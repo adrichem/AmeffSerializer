@@ -2,12 +2,12 @@
 {
     using System.Collections.Generic;
 
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SourcedConnectionType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Relationship))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NestingRelationship))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Line))]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Xml.Serialization.XmlInclude(typeof(SourcedConnectionType))]
+    [System.Xml.Serialization.XmlInclude(typeof(Relationship))]
+    [System.Xml.Serialization.XmlInclude(typeof(NestingRelationship))]
+    [System.Xml.Serialization.XmlInclude(typeof(Line))]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ConnectionType : ViewConceptType
     {
 
@@ -42,7 +42,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("bendpoint")]
+        [System.Xml.Serialization.XmlElement("bendpoint")]
         public List<LocationType> bendpoint
         {
             get
@@ -67,7 +67,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "IDREF")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
         public string source
         {
             get
@@ -80,7 +80,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "IDREF")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
         public string target
         {
             get

@@ -2,17 +2,17 @@
 {
     using System.Collections.Generic;
 
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ConnectionType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SourcedConnectionType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Relationship))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NestingRelationship))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Line))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ViewNodeType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Container))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Element))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Label))]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlInclude(typeof(ConnectionType))]
+    [System.Xml.Serialization.XmlInclude(typeof(SourcedConnectionType))]
+    [System.Xml.Serialization.XmlInclude(typeof(Relationship))]
+    [System.Xml.Serialization.XmlInclude(typeof(NestingRelationship))]
+    [System.Xml.Serialization.XmlInclude(typeof(Line))]
+    [System.Xml.Serialization.XmlInclude(typeof(ViewNodeType))]
+    [System.Xml.Serialization.XmlInclude(typeof(Container))]
+    [System.Xml.Serialization.XmlInclude(typeof(Element))]
+    [System.Xml.Serialization.XmlInclude(typeof(Label))]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ViewConceptType
     {
 
@@ -39,7 +39,7 @@
             this._label = new List<LangStringType>();
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("label")]
+        [System.Xml.Serialization.XmlElement("label")]
         public List<LangStringType> label
         {
             get
@@ -52,7 +52,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("documentation")]
+        [System.Xml.Serialization.XmlElement("documentation")]
         public List<PreservedLangStringType> documentation
         {
             get
@@ -77,7 +77,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("viewRef")]
+        [System.Xml.Serialization.XmlElement("viewRef")]
         public List<ReferenceType> viewRef
         {
             get
@@ -90,7 +90,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "ID")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "ID")]
         public string identifier
         {
             get
@@ -103,7 +103,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        [System.Xml.Serialization.XmlAnyAttribute()]
         public List<System.Xml.XmlAttribute> AnyAttr
         {
             get

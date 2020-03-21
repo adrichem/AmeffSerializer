@@ -1,11 +1,11 @@
 ﻿namespace AmeffSerializer.V31
 {
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/", IncludeInSchema = false)]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/", IncludeInSchema = false)]
     public enum ItemsChoiceType
     {
 
-        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
+        [System.Xml.Serialization.XmlEnum("##any:")]
         Item,
         schema,
         schemaInfo,

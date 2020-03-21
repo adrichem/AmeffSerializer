@@ -1,7 +1,7 @@
 ﻿namespace AmeffSerializer.V31
 {
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [System.Serializable()]
+    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class ReferenceType
     {
 
@@ -9,7 +9,7 @@
         private string _ref;
         #endregion
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "IDREF")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
         public string @ref
         {
             get
