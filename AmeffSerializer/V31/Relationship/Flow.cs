@@ -1,4 +1,4 @@
-﻿namespace AmeffSerializer.V31.Relationship
+﻿namespace Adrichem.Serialization.Ameff.V31.Relationship
 {
 
     [System.Serializable()]

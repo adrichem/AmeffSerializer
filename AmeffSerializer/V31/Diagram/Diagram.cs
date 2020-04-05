@@ -1,4 +1,4 @@
-﻿namespace AmeffSerializer.V31.Diagram
+﻿namespace Adrichem.Serialization.Ameff.V31.Diagram
 {
     using View;
     using System.Collections.Generic;

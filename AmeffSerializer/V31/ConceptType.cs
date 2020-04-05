@@ -1,7 +1,7 @@
-﻿namespace AmeffSerializer.V31
+﻿namespace Adrichem.Serialization.Ameff.V31
 {
-    using AmeffSerializer.V31.Element;
-    using AmeffSerializer.V31.Relationship;
+    using Element;
+    using Relationship;
     using System.Collections.Generic;
 
     [System.Xml.Serialization.XmlInclude(typeof(RelationshipType))]

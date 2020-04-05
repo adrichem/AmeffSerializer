@@ -1,4 +1,4 @@
-﻿namespace AmeffSerializer.V31.View
+﻿namespace Adrichem.Serialization.Ameff.V31.View
 {
     using System.Collections.Generic;
 

@@ -1,4 +1,4 @@
-﻿namespace AmeffSerializer.V31
+﻿namespace Adrichem.Serialization.Ameff.V31
 {
 
     [System.Serializable()]

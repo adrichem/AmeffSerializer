@@ -1,4 +1,4 @@
-﻿namespace AmeffSerializer.V31.Element
+﻿namespace Adrichem.Serialization.Ameff.V31.Element
 {
     [System.Xml.Serialization.XmlInclude(typeof(Location))]
     [System.Xml.Serialization.XmlInclude(typeof(Grouping))]

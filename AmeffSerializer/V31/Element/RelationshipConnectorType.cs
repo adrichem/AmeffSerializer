@@ -1,4 +1,4 @@
-﻿namespace AmeffSerializer.V31.Element
+﻿namespace Adrichem.Serialization.Ameff.V31.Element
 {
     [System.Xml.Serialization.XmlInclude(typeof(OrJunction))]
     [System.Xml.Serialization.XmlInclude(typeof(AndJunction))]
