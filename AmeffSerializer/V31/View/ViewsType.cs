@@ -17,7 +17,6 @@
         public ViewsType()
         {
             this._diagrams = new List<Diagram>();
-            this._viewpoints = new List<ViewpointType>();
         }
 
         [System.Xml.Serialization.XmlArrayItem("viewpoint", IsNullable = false)]
