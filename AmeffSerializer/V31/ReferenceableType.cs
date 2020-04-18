@@ -96,89 +96,28 @@
     public abstract partial class ReferenceableType
     {
 
-        #region Private fields
-        private List<LangStringType> _name;
-
-        private List<PreservedLangStringType> _documentation;
-
-        private List<System.Xml.XmlElement> _any;
-
-        private string _identifier;
-
-        private List<System.Xml.XmlAttribute> _anyAttr;
-        #endregion
-
         public ReferenceableType()
         {
-            this._anyAttr = new List<System.Xml.XmlAttribute>();
-            this._any = new List<System.Xml.XmlElement>();
-            this._documentation = new List<PreservedLangStringType>();
-            this._name = new List<LangStringType>();
+            this.AnyAttr = new List<System.Xml.XmlAttribute>();
+            this.Any = new List<System.Xml.XmlElement>();
+            this.documentation = new List<PreservedLangStringType>();
+            this.name = new List<LangStringType>();
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("name")]
-        public List<LangStringType> name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
+        [System.Xml.Serialization.XmlElement("name")]
+        public List<LangStringType> name { get; set; }
 
-        [System.Xml.Serialization.XmlElementAttribute("documentation")]
-        public List<PreservedLangStringType> documentation
-        {
-            get
-            {
-                return this._documentation;
-            }
-            set
-            {
-                this._documentation = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public List<System.Xml.XmlElement> Any
-        {
-            get
-            {
-                return this._any;
-            }
-            set
-            {
-                this._any = value;
-            }
-        }
-
+        [System.Xml.Serialization.XmlElement("documentation")]
+        public List<PreservedLangStringType> documentation { get; set; }
+        
+        [System.Xml.Serialization.XmlAnyElement()]
+        public List<System.Xml.XmlElement> Any { get; set; }
+        
         [System.Xml.Serialization.XmlAttribute(DataType = "ID")]
-        public string identifier
-        {
-            get
-            {
-                return this._identifier;
-            }
-            set
-            {
-                this._identifier = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
-        public List<System.Xml.XmlAttribute> AnyAttr
-        {
-            get
-            {
-                return this._anyAttr;
-            }
-            set
-            {
-                this._anyAttr = value;
-            }
-        }
+        public string identifier { get; set; }
+        
+        [System.Xml.Serialization.XmlAnyAttribute()]
+        public List<System.Xml.XmlAttribute> AnyAttr { get; set; }
+        
     }
 }

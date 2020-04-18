@@ -54,6 +54,9 @@ namespace TestAmeffSerializer.V31
             Buffer.Seek(0, SeekOrigin.Begin);
             using (var Reader = new StreamReader(Buffer, new System.Text.UTF8Encoding(false)))
             {
+                string xml = Reader.ReadToEnd();
+                Buffer.Seek(0, SeekOrigin.Begin);
+
                 using (var XmlRdr = XmlReader.Create(Reader, MyXmlReaderSettings))
                 {
                     var myAmeff = (ModelType)new XmlSerializer(typeof(ModelType)).Deserialize(XmlRdr);
@@ -122,5 +125,108 @@ namespace TestAmeffSerializer.V31
                 }
             }
         }
+
+        [TestMethod]
+        public void AccessTest()
+        {
+            MemoryStream Buffer = new MemoryStream();
+
+            IList<ValidationEventArgs> ValidationIssues = new List<ValidationEventArgs>();
+
+            var MyXmlReaderSettings = new XmlReaderSettings
+            {
+                Schemas = Schemas,
+                ValidationType = ValidationType.Schema,
+                ValidationFlags = XmlSchemaValidationFlags.ProcessIdentityConstraints | XmlSchemaValidationFlags.ReportValidationWarnings
+            };
+            MyXmlReaderSettings.ValidationEventHandler += new ValidationEventHandler((sender, args) => ValidationIssues.Add(args));
+
+            using (var Writer = new StreamWriter(Buffer, new System.Text.UTF8Encoding(false), 1024, true))
+            {
+                var AmeffModel = new ModelType();
+                AmeffModel.identifier = "id-1";
+                AmeffModel.name = new List<LangStringType> { new LangStringType { Value = "accesstest" } };
+                AmeffModel.elements = new List<ElementType>
+            {
+                new BusinessActor { identifier = "actor1", name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
+                new BusinessObject { identifier = "object1", name = new List<LangStringType> { new LangStringType { Value = "object1"}} },
+            };
+                AmeffModel.relationships = new List<RelationshipType>
+            {
+                new Access { identifier = "access1", source= "actor1", target = "object1", accessType = AccessTypeEnum.ReadWrite },
+                new Access { identifier = "access2", source= "actor1", target = "object1" },
+            };
+
+                new XmlSerializer(typeof(ModelType)).Serialize(Writer, AmeffModel);
+            }
+
+            Buffer.Seek(0, SeekOrigin.Begin);
+            using (var Reader = new StreamReader(Buffer, new System.Text.UTF8Encoding(false)))
+            {
+                string xml = Reader.ReadToEnd();
+                Buffer.Seek(0, SeekOrigin.Begin);
+                using (var XmlRdr = XmlReader.Create(Reader, MyXmlReaderSettings))
+                {
+                    var myAmeff = (ModelType)new XmlSerializer(typeof(ModelType)).Deserialize(XmlRdr);
+                    Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+                    Assert.IsTrue(myAmeff.relationships.OfType<Access>().First().accessType == AccessTypeEnum.ReadWrite);
+                    Assert.IsTrue(myAmeff.relationships.OfType<Access>().Last().accessType == AccessTypeEnum.Access);
+                    Assert.IsTrue(xml.Contains("accessType=\"ReadWrite\""));
+                    Assert.IsFalse(xml.Contains("accessType=\"Access\""));
+                }
+            }
+        }
+
+        [TestMethod]
+        public void InfluenceTest()
+        {
+            MemoryStream Buffer = new MemoryStream();
+
+            IList<ValidationEventArgs> ValidationIssues = new List<ValidationEventArgs>();
+
+            var MyXmlReaderSettings = new XmlReaderSettings
+            {
+                Schemas = Schemas,
+                ValidationType = ValidationType.Schema,
+                ValidationFlags = XmlSchemaValidationFlags.ProcessIdentityConstraints | XmlSchemaValidationFlags.ReportValidationWarnings
+            };
+            MyXmlReaderSettings.ValidationEventHandler += new ValidationEventHandler((sender, args) => ValidationIssues.Add(args));
+
+            using (var Writer = new StreamWriter(Buffer, new System.Text.UTF8Encoding(false), 1024, true))
+            {
+                var AmeffModel = new ModelType();
+                AmeffModel.identifier = "id-1";
+                AmeffModel.name = new List<LangStringType> { new LangStringType { Value = "influencetest" } };
+                AmeffModel.elements = new List<ElementType>
+            {
+                new BusinessActor { identifier = "actor1", name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
+                new BusinessObject { identifier = "object1", name = new List<LangStringType> { new LangStringType { Value = "object1"}} },
+            };
+                AmeffModel.relationships = new List<RelationshipType>
+            {
+                new Influence { identifier = "inf1", source= "actor1", target = "object1", modifier = "++" },
+                new Influence { identifier = "inf2", source= "actor1", target = "object1" },
+            };
+
+                new XmlSerializer(typeof(ModelType)).Serialize(Writer, AmeffModel);
+            }
+
+            Buffer.Seek(0, SeekOrigin.Begin);
+            using (var Reader = new StreamReader(Buffer, new System.Text.UTF8Encoding(false)))
+            {
+                string xml = Reader.ReadToEnd();
+                Buffer.Seek(0, SeekOrigin.Begin);
+                using (var XmlRdr = XmlReader.Create(Reader, MyXmlReaderSettings))
+                {
+                    var myAmeff = (ModelType)new XmlSerializer(typeof(ModelType)).Deserialize(XmlRdr);
+                    Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+                    Assert.IsTrue(myAmeff.relationships.OfType<Influence>().First().modifier == "++");
+                    Assert.IsTrue(myAmeff.relationships.OfType<Influence>().Last().modifier == null);
+                    Assert.IsTrue(xml.Contains("modifier=\"++\""));
+                    Assert.IsFalse(xml.Contains("modifier=\"\""));
+                }
+            }
+        }
+
     }
 }
