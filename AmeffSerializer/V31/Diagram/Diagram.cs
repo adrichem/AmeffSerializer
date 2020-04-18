@@ -8,42 +8,17 @@
     public partial class Diagram : ViewType
     {
 
-        #region Private fields
-        private List<ViewNodeType> _node;
-
-        private List<ConnectionType> _connection;
-        #endregion
-
         public Diagram()
         {
-            this._connection = new List<ConnectionType>();
-            this._node = new List<ViewNodeType>();
+            this.connection = new List<ConnectionType>();
+            this.node = new List<ViewNodeType>();
         }
 
         [System.Xml.Serialization.XmlElement("node")]
-        public List<ViewNodeType> node
-        {
-            get
-            {
-                return this._node;
-            }
-            set
-            {
-                this._node = value;
-            }
-        }
+        public List<ViewNodeType> node { get; set; }
 
         [System.Xml.Serialization.XmlElement("connection")]
-        public List<ConnectionType> connection
-        {
-            get
-            {
-                return this._connection;
-            }
-            set
-            {
-                this._connection = value;
-            }
-        }
+        public List<ConnectionType> connection { get; set; }
+
     }
 }

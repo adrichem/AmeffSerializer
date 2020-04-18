@@ -155,7 +155,7 @@
             }
         }
 
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "ID")]
+        [System.Xml.Serialization.XmlAttribute(DataType = "ID")]
         public string identifier
         {
             get

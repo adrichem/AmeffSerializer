@@ -9,26 +9,13 @@ namespace Adrichem.Serialization.Ameff.V31.Diagram
     public partial class Container : ViewNodeType
     {
 
-        #region Private fields
-        private List<ViewNodeType> _node;
-        #endregion
-
         public Container()
         {
-            this._node = new List<ViewNodeType>();
+            this.node = new List<ViewNodeType>();
         }
 
         [System.Xml.Serialization.XmlElement("node")]
-        public List<ViewNodeType> node
-        {
-            get
-            {
-                return this._node;
-            }
-            set
-            {
-                this._node = value;
-            }
-        }
+        public List<ViewNodeType> node { get; set; }
+
     }
 }

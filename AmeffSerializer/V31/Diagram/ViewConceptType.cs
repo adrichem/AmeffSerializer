@@ -15,105 +15,30 @@
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ViewConceptType
     {
-
-        #region Private fields
-        private List<LangStringType> _label;
-
-        private List<PreservedLangStringType> _documentation;
-
-        private StyleType _style;
-
-        private List<ReferenceType> _viewRef;
-
-        private string _identifier;
-
-        private List<System.Xml.XmlAttribute> _anyAttr;
-        #endregion
-
         public ViewConceptType()
         {
-            this._anyAttr = new List<System.Xml.XmlAttribute>();
-            this._viewRef = new List<ReferenceType>();
-            this._style = new StyleType();
-            this._documentation = new List<PreservedLangStringType>();
-            this._label = new List<LangStringType>();
+            this.AnyAttr = new List<System.Xml.XmlAttribute>();
+            this.viewRef = new List<ReferenceType>();
+            this.style = new StyleType();
+            this.documentation = new List<PreservedLangStringType>();
+            this.label = new List<LangStringType>();
         }
 
         [System.Xml.Serialization.XmlElement("label")]
-        public List<LangStringType> label
-        {
-            get
-            {
-                return this._label;
-            }
-            set
-            {
-                this._label = value;
-            }
-        }
+        public List<LangStringType> label { get; set; }
 
         [System.Xml.Serialization.XmlElement("documentation")]
-        public List<PreservedLangStringType> documentation
-        {
-            get
-            {
-                return this._documentation;
-            }
-            set
-            {
-                this._documentation = value;
-            }
-        }
+        public List<PreservedLangStringType> documentation { get; set; }
 
-        public StyleType style
-        {
-            get
-            {
-                return this._style;
-            }
-            set
-            {
-                this._style = value;
-            }
-        }
+        public StyleType style { get; set; }
 
         [System.Xml.Serialization.XmlElement("viewRef")]
-        public List<ReferenceType> viewRef
-        {
-            get
-            {
-                return this._viewRef;
-            }
-            set
-            {
-                this._viewRef = value;
-            }
-        }
+        public List<ReferenceType> viewRef { get; set; }
 
         [System.Xml.Serialization.XmlAttribute(DataType = "ID")]
-        public string identifier
-        {
-            get
-            {
-                return this._identifier;
-            }
-            set
-            {
-                this._identifier = value;
-            }
-        }
+        public string identifier { get; set; }
 
         [System.Xml.Serialization.XmlAnyAttribute()]
-        public List<System.Xml.XmlAttribute> AnyAttr
-        {
-            get
-            {
-                return this._anyAttr;
-            }
-            set
-            {
-                this._anyAttr = value;
-            }
-        }
+        public List<System.Xml.XmlAttribute> AnyAttr { get; set; }
     }
 }

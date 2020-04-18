@@ -6,21 +6,7 @@
     public partial class Element : Container
     {
 
-        #region Private fields
-        private string _elementRef;
-        #endregion
-
         [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
-        public string elementRef
-        {
-            get
-            {
-                return this._elementRef;
-            }
-            set
-            {
-                this._elementRef = value;
-            }
-        }
+        public string elementRef { get; set; }
     }
 }

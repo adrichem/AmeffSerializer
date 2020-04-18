@@ -11,86 +11,25 @@
     public abstract partial class ConnectionType : ViewConceptType
     {
 
-        #region Private fields
-        private LocationType _sourceAttachment;
-
-        private List<LocationType> _bendpoint;
-
-        private LocationType _targetAttachment;
-
-        private string _source;
-
-        private string _target;
-        #endregion
-
         public ConnectionType()
         {
-            this._targetAttachment = new LocationType();
-            this._bendpoint = new List<LocationType>();
-            this._sourceAttachment = new LocationType();
+            this.targetAttachment = new LocationType();
+            this.bendpoint = new List<LocationType>();
+            this.sourceAttachment = new LocationType();
         }
 
-        public LocationType sourceAttachment
-        {
-            get
-            {
-                return this._sourceAttachment;
-            }
-            set
-            {
-                this._sourceAttachment = value;
-            }
-        }
+        public LocationType sourceAttachment { get; set; }
 
         [System.Xml.Serialization.XmlElement("bendpoint")]
-        public List<LocationType> bendpoint
-        {
-            get
-            {
-                return this._bendpoint;
-            }
-            set
-            {
-                this._bendpoint = value;
-            }
-        }
+        public List<LocationType> bendpoint { get; set; }
 
-        public LocationType targetAttachment
-        {
-            get
-            {
-                return this._targetAttachment;
-            }
-            set
-            {
-                this._targetAttachment = value;
-            }
-        }
+        public LocationType targetAttachment { get; set; }
+       
+        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
+        public string source { get; set; }
 
         [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
-        public string source
-        {
-            get
-            {
-                return this._source;
-            }
-            set
-            {
-                this._source = value;
-            }
-        }
+        public string target { get; set; }
 
-        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
-        public string target
-        {
-            get
-            {
-                return this._target;
-            }
-            set
-            {
-                this._target = value;
-            }
-        }
     }
 }
