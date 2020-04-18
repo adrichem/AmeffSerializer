@@ -5,6 +5,8 @@
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class Association : RelationshipType
     {
+        [System.Xml.Serialization.XmlAttribute()]
+        [System.ComponentModel.DefaultValue(false)]
         public bool isDirected { get; set; }
     }
 }

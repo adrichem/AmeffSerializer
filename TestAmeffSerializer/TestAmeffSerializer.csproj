@@ -16,4 +16,8 @@
     <ProjectReference Include="..\AmeffSerializer\AmeffSerializer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="V31\Relationship\" />
+  </ItemGroup>
+
 </Project>

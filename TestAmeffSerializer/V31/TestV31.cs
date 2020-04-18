@@ -1,4 +1,4 @@
-namespace TestAmeffSerializer
+namespace TestAmeffSerializer.V31
 {
     using Adrichem.Serialization.Ameff.V31;
     using Adrichem.Serialization.Ameff.V31.Element;
@@ -27,6 +27,50 @@ namespace TestAmeffSerializer
             Schemas.Add(null, "http://www.opengroup.org/xsd/archimate/3.1/archimate3_View.xsd");
             Schemas.Add(null, "http://www.opengroup.org/xsd/archimate/3.1/archimate3_Diagram.xsd");
             Schemas.Add("http://purl.org/dc/elements/1.1/", "http://dublincore.org/schemas/xmls/qdc/2008/02/11/dc.xsd");
+        }
+
+        [TestMethod]
+        public void EmptyModel()
+        {
+            IList<ValidationEventArgs> ValidationIssues = new List<ValidationEventArgs>();
+
+            var MyXmlReaderSettings = new XmlReaderSettings
+            {
+                Schemas = Schemas,
+                ValidationType = ValidationType.Schema,
+                ValidationFlags = XmlSchemaValidationFlags.ProcessIdentityConstraints | XmlSchemaValidationFlags.ReportValidationWarnings
+            };
+            MyXmlReaderSettings.ValidationEventHandler += new ValidationEventHandler((sender, args) => ValidationIssues.Add(args));
+
+            MemoryStream Buffer = new MemoryStream();
+            using (var Writer = new StreamWriter(Buffer, new System.Text.UTF8Encoding(false),1024, true))
+            {
+                var AmeffModel = new ModelType();
+                AmeffModel.identifier = "id-1";
+                AmeffModel.name = new List<LangStringType> { new LangStringType { Value = "empty" } };
+                new XmlSerializer(typeof(ModelType)).Serialize(Writer, AmeffModel);
+            }
+
+            Buffer.Seek(0, SeekOrigin.Begin);
+            using (var Reader = new StreamReader(Buffer, new System.Text.UTF8Encoding(false)))
+            {
+                using (var XmlRdr = XmlReader.Create(Reader, MyXmlReaderSettings))
+                {
+                    var myAmeff = (ModelType)new XmlSerializer(typeof(ModelType)).Deserialize(XmlRdr);
+                    Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+
+                    Assert.IsTrue(myAmeff.Any.Count == 0);
+                    Assert.IsTrue(myAmeff.AnyAttr.Count == 0);
+                    Assert.IsTrue(myAmeff.documentation.Count == 0);
+                    Assert.IsTrue(myAmeff.elements.Count == 0);
+                    Assert.IsTrue(myAmeff.metadata == null);
+                    Assert.IsTrue(myAmeff.relationships.Count == 0);
+                    Assert.IsTrue(myAmeff.organizations.Count == 0);
+                    Assert.IsTrue(myAmeff.properties.Count == 0);
+                    Assert.IsTrue(myAmeff.propertyDefinitions.Count == 0);
+                    Assert.IsTrue(myAmeff.views == null);
+                }
+            }
         }
 
         [TestMethod]
@@ -66,10 +110,15 @@ namespace TestAmeffSerializer
             Buffer.Seek(0,SeekOrigin.Begin);
             using (var Reader = new StreamReader(Buffer, new System.Text.UTF8Encoding(false)))
             {
+                string xml = Reader.ReadToEnd();
+                Buffer.Seek(0, SeekOrigin.Begin);
                 using (var XmlRdr = XmlReader.Create(Reader, MyXmlReaderSettings))
                 {
                     var myAmeff = (ModelType)new XmlSerializer(typeof(ModelType)).Deserialize(XmlRdr);
                     Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i=>i.Exception.ToString())));
+                    Assert.IsTrue(myAmeff.relationships.OfType<Association>().First().isDirected);
+                    Assert.IsFalse(myAmeff.relationships.OfType<Association>().Last().isDirected);
+                    Assert.IsFalse(xml.Contains("isDirected=\"false\""));
                 }
             }
         }
