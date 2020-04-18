@@ -4,13 +4,6 @@
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class StyleType
     {
-        public StyleType()
-        {
-            this.font = new FontType();
-            this.fillColor = new RGBColorType();
-            this.lineColor = new RGBColorType();
-        }
-
         public RGBColorType lineColor { get; set; }
 
         public RGBColorType fillColor { get; set; }

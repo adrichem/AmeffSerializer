@@ -1,8 +1,10 @@
 namespace TestAmeffSerializer.V31
 {
     using Adrichem.Serialization.Ameff.V31;
+    using Adrichem.Serialization.Ameff.V31.Diagram;
     using Adrichem.Serialization.Ameff.V31.Element;
     using Adrichem.Serialization.Ameff.V31.Relationship;
+    using Adrichem.Serialization.Ameff.V31.View;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Collections.Generic;
     using System.IO;
@@ -227,6 +229,63 @@ namespace TestAmeffSerializer.V31
                 }
             }
         }
+
+        [TestMethod]
+        public void RGBColorTest()
+        {
+            MemoryStream Buffer = new MemoryStream();
+
+            IList<ValidationEventArgs> ValidationIssues = new List<ValidationEventArgs>();
+
+            var MyXmlReaderSettings = new XmlReaderSettings
+            {
+                Schemas = Schemas,
+                ValidationType = ValidationType.Schema,
+                ValidationFlags = XmlSchemaValidationFlags.ProcessIdentityConstraints | XmlSchemaValidationFlags.ReportValidationWarnings
+            };
+            MyXmlReaderSettings.ValidationEventHandler += new ValidationEventHandler((sender, args) => ValidationIssues.Add(args));
+
+            using (var Writer = new StreamWriter(Buffer, new System.Text.UTF8Encoding(false), 1024, true))
+            {
+                RGBColorType Color = new RGBColorType
+                {
+                    r = 255,
+                    g = 255,
+                    b = 255,
+                };
+                new XmlSerializer(typeof(RGBColorType)).Serialize(Writer, Color);
+            }
+
+            Buffer.Seek(0, SeekOrigin.Begin);
+            using (var Reader = new StreamReader(Buffer, new System.Text.UTF8Encoding(false)))
+            {
+                string xml = Reader.ReadToEnd();
+                Assert.IsFalse(xml.Contains("a=\""));
+            }
+
+            Buffer = new MemoryStream();
+            using (var Writer = new StreamWriter(Buffer, new System.Text.UTF8Encoding(false), 1024, true))
+            {
+                RGBColorType Color = new RGBColorType
+                {
+                    r = 255,
+                    g = 255,
+                    b = 255,
+                    a = "30",
+                };
+                new XmlSerializer(typeof(RGBColorType)).Serialize(Writer, Color);
+            }
+
+            Buffer.Seek(0, SeekOrigin.Begin);
+            using (var Reader = new StreamReader(Buffer, new System.Text.UTF8Encoding(false)))
+            {
+                string xml = Reader.ReadToEnd();
+                Assert.IsTrue(xml.Contains("a=\"30\""));
+            }
+
+
+        }
+
 
     }
 }

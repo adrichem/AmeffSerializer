@@ -14,6 +14,7 @@
         public byte b { get; set; }
 
         [System.Xml.Serialization.XmlAttribute()]
-        public byte a { get; set; }
+        public string a { get; set; }
+    
     }
 }

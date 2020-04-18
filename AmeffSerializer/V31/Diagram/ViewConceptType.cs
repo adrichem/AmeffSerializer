@@ -15,15 +15,6 @@
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ViewConceptType
     {
-        public ViewConceptType()
-        {
-            this.AnyAttr = new List<System.Xml.XmlAttribute>();
-            this.viewRef = new List<ReferenceType>();
-            this.style = new StyleType();
-            this.documentation = new List<PreservedLangStringType>();
-            this.label = new List<LangStringType>();
-        }
-
         [System.Xml.Serialization.XmlElement("label")]
         public List<LangStringType> label { get; set; }
 
