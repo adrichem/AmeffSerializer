@@ -1,6 +1,5 @@
 ﻿namespace Adrichem.Serialization.Ameff.V31
 {
-    using Diagram;
     using Element;
     using Relationship;
     using View;
@@ -95,14 +94,6 @@
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ReferenceableType
     {
-
-        public ReferenceableType()
-        {
-            this.AnyAttr = new List<System.Xml.XmlAttribute>();
-            this.Any = new List<System.Xml.XmlElement>();
-            this.documentation = new List<PreservedLangStringType>();
-            this.name = new List<LangStringType>();
-        }
 
         [System.Xml.Serialization.XmlElement("name")]
         public List<LangStringType> name { get; set; }

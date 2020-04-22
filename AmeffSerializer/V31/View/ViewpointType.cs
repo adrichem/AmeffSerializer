@@ -6,15 +6,6 @@
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class ViewpointType : NamedReferenceableType
     {
-        public ViewpointType()
-        {
-            this.modelingNote = new List<ModelingNoteType>();
-            this.allowedRelationshipType = new List<AllowedRelationshipTypeType>();
-            this.allowedElementType = new List<AllowedElementTypeType>();
-            this.concern = new List<ConcernType>();
-            this.properties = new List<PropertyType>();
-        }
-
         [System.Xml.Serialization.XmlArrayItem("property", IsNullable = false)]
         public List<PropertyType> properties { get; set; }
 

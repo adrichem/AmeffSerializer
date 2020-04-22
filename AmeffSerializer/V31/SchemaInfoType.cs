@@ -7,11 +7,6 @@
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class SchemaInfoType
     {
-        public SchemaInfoType()
-        {
-            this.Any = new List<System.Xml.XmlElement>();
-        }
-
         public string schema { get; set; }
 
         public string schemaversion { get; set; }
