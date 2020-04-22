@@ -579,10 +579,10 @@ namespace TestAmeffSerializer.V31
                                     {
                                         identifier = "node1",
                                         label = new List<LangStringType> { new LangStringType { Value = "Group that holds nodes"} },
-                                        X = 0.ToString(),
-                                        Y = 0.ToString(),
-                                        W = 577.ToString(),
-                                        H = 301.ToString(),
+                                        X = 0,
+                                        Y = 0,
+                                        W = 577,
+                                        H = 301,
                                         style = new StyleType
                                         {
                                             fillColor = new RGBColorType
@@ -616,10 +616,10 @@ namespace TestAmeffSerializer.V31
                                             new Element
                                             {
                                                 identifier="node1.1",
-                                                W = 144.ToString(),
-                                                H = 60.ToString(),
-                                                X = 108.ToString(),
-                                                Y = 132.ToString(),
+                                                W = 144,
+                                                H = 60,
+                                                X = 108,
+                                                Y = 132,
                                                 elementRef = "actor1",
                                                 style = new StyleType
                                                 {
@@ -645,10 +645,10 @@ namespace TestAmeffSerializer.V31
                                             new Element
                                             {
                                                 identifier="node1.2",
-                                                W = 144.ToString(),
-                                                H = 60.ToString(),
-                                                X = 312.ToString(),
-                                                Y = 132.ToString(),
+                                                W = 144,
+                                                H = 60,
+                                                X = 312,
+                                                Y = 132,
                                                 elementRef = "actor2",
                                             }
                                         }
@@ -666,25 +666,25 @@ namespace TestAmeffSerializer.V31
                                         target = "node1.2",
                                         sourceAttachment = new LocationType
                                         {
-                                            X = 108.ToString(),
-                                            Y = 162.ToString()
+                                            X = 108,
+                                            Y = 162
                                         },
                                         bendpoint = new List<LocationType>
                                         {
                                             new LocationType
                                             {
-                                                X = 60.ToString(),
-                                                Y = 162.ToString(),
+                                                X = 60,
+                                                Y = 162,
                                             },
                                             new LocationType
                                             {
-                                                X = 60.ToString(),
-                                                Y = 69.ToString(),
+                                                X = 60,
+                                                Y = 69,
                                             },
                                             new LocationType
                                             {
-                                                X = 384.ToString(),
-                                                Y = 69.ToString(),
+                                                X = 384,
+                                                Y = 69,
                                             }
 
                                         }
