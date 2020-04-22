@@ -10,14 +10,6 @@
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ConnectionType : ViewConceptType
     {
-
-        public ConnectionType()
-        {
-            this.targetAttachment = new LocationType();
-            this.bendpoint = new List<LocationType>();
-            this.sourceAttachment = new LocationType();
-        }
-
         public LocationType sourceAttachment { get; set; }
 
         [System.Xml.Serialization.XmlElement("bendpoint")]

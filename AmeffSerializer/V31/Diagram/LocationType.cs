@@ -4,11 +4,11 @@
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class LocationType
     {
-        [System.Xml.Serialization.XmlAttribute(DataType = "nonNegativeInteger")]
-        public string x { get; set; }
+        [System.Xml.Serialization.XmlAttribute(AttributeName = "x", DataType = "nonNegativeInteger")]
+        public string X { get; set; }
 
-        [System.Xml.Serialization.XmlAttribute(DataType = "nonNegativeInteger")]
-        public string y { get; set; }
+        [System.Xml.Serialization.XmlAttribute(AttributeName = "y", DataType = "nonNegativeInteger")]
+        public string Y { get; set; }
     }
 
 }
