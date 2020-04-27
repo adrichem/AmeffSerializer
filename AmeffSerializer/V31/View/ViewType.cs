@@ -1,21 +1,22 @@
 ﻿namespace Adrichem.Serialization.Ameff.V31.View
 {
     using System.Collections.Generic;
+    using System.Xml.Serialization;
 
-    [System.Xml.Serialization.XmlInclude(typeof(Diagram.Diagram))]
+    [XmlInclude(typeof(Diagram.Diagram))]
     [System.Serializable()]
-    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ViewType : NamedReferenceableType
     {
+        [XmlArray("properties")]
+        [XmlArrayItem("property", IsNullable = false)]
+        public List<PropertyType> Properties { get; set; }
 
-        [System.Xml.Serialization.XmlArrayItem("property", IsNullable = false)]
-        public List<PropertyType> properties { get; set; }
+        [XmlAttribute(AttributeName = "viewpoint")]
+        public string Viewpoint { get; set; }
 
-        [System.Xml.Serialization.XmlAttribute()]
-        public string viewpoint { get; set; }
-
-        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
-        public string viewpointRef { get; set; }
+        [XmlAttribute(AttributeName = "viewpointRef", DataType = "IDREF")]
+        public string ViewpointRef { get; set; }
     }
 
 }

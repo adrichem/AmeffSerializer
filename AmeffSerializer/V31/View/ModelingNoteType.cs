@@ -1,20 +1,16 @@
 ﻿namespace Adrichem.Serialization.Ameff.V31.View
 {
     using System.Collections.Generic;
-
+    using System.Xml.Serialization;
 
     [System.Serializable()]
-    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class ModelingNoteType
     {
-        public ModelingNoteType()
-        {
-            this.documentation = new List<PreservedLangStringType>();
-        }
+        [XmlElement("documentation")]
+        public List<PreservedLangStringType> Documentation { get; set; }
 
-        [System.Xml.Serialization.XmlElement("documentation")]
-        public List<PreservedLangStringType> documentation { get; set; }
-        [System.Xml.Serialization.XmlAttribute()]
-        public string type { get; set; }
+        [XmlAttribute("type")]
+        public string Type { get; set; }
     }
 }

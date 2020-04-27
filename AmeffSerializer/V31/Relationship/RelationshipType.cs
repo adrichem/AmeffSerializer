@@ -15,10 +15,10 @@
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class RelationshipType : ConceptType
     {
-        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
-        public string source { get; set; }
+        [System.Xml.Serialization.XmlAttribute(AttributeName = "source", DataType = "IDREF")]
+        public string Source { get; set; }
         
-        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
-        public string target { get; set; }
+        [System.Xml.Serialization.XmlAttribute(AttributeName = "target", DataType = "IDREF")]
+        public string Target { get; set; }
     }
 }

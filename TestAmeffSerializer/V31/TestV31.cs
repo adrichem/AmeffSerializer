@@ -106,8 +106,8 @@ namespace TestAmeffSerializer.V31
             var Buffer = Serialize(
                 new ModelType
                 {
-                    identifier = "id-1",
-                    name = new List<LangStringType> { new LangStringType { Value = "empty" } }
+                    Identifier = "id-1",
+                    Name = new List<LangStringType> { new LangStringType { Value = "empty" } }
                 }
                 , TempFileName(string.Empty)
             );
@@ -116,14 +116,14 @@ namespace TestAmeffSerializer.V31
             Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
             Assert.IsTrue(Result.Model.Any.Count == 0);
             Assert.IsTrue(Result.Model.AnyAttr.Count == 0);
-            Assert.IsTrue(Result.Model.documentation.Count == 0);
-            Assert.IsTrue(Result.Model.elements.Count == 0);
-            Assert.IsTrue(Result.Model.metadata == null);
-            Assert.IsTrue(Result.Model.relationships.Count == 0);
-            Assert.IsTrue(Result.Model.organizations.Count == 0);
-            Assert.IsTrue(Result.Model.properties.Count == 0);
-            Assert.IsTrue(Result.Model.propertyDefinitions.Count == 0);
-            Assert.IsTrue(Result.Model.views == null);
+            Assert.IsTrue(Result.Model.Documentation.Count == 0);
+            Assert.IsTrue(Result.Model.Elements.Count == 0);
+            Assert.IsTrue(Result.Model.Metadata == null);
+            Assert.IsTrue(Result.Model.Relationships.Count == 0);
+            Assert.IsTrue(Result.Model.Organizations.Count == 0);
+            Assert.IsTrue(Result.Model.Properties.Count == 0);
+            Assert.IsTrue(Result.Model.PropertyDefinitions.Count == 0);
+            Assert.IsTrue(Result.Model.Views == null);
         }
 
         [TestMethod]
@@ -139,12 +139,12 @@ namespace TestAmeffSerializer.V31
             
             Stream Buffer = Serialize(new ModelType
                 {
-                    identifier = "id-1",
-                    name = new List<LangStringType> { new LangStringType { Value = "empty" } },
-                    documentation = new List<PreservedLangStringType>
+                    Identifier = "id-1",
+                    Name = new List<LangStringType> { new LangStringType { Value = "empty" } },
+                    Documentation = new List<PreservedLangStringType>
                     {
                         new PreservedLangStringType {  Value = ExpectedDocumentation1},
-                        new PreservedLangStringType { lang = ExpectedLanguage2, Value = ExpectedDocumentation2},
+                        new PreservedLangStringType { Lang = ExpectedLanguage2, Value = ExpectedDocumentation2},
                     }
                 }, 
                 TempFileName(string.Empty)
@@ -152,10 +152,10 @@ namespace TestAmeffSerializer.V31
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
             Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
-            Assert.AreEqual(ExpectedLanguage1, Result.Model.documentation.First().lang);
-            Assert.AreEqual(ExpectedDocumentation1, Result.Model.documentation.First().Value);
-            Assert.AreEqual(ExpectedLanguage2, Result.Model.documentation.Last().lang);
-            Assert.AreEqual(ExpectedDocumentation2, Result.Model.documentation.Last().Value);
+            Assert.AreEqual(ExpectedLanguage1, Result.Model.Documentation.First().Lang);
+            Assert.AreEqual(ExpectedDocumentation1, Result.Model.Documentation.First().Value);
+            Assert.AreEqual(ExpectedLanguage2, Result.Model.Documentation.Last().Lang);
+            Assert.AreEqual(ExpectedDocumentation2, Result.Model.Documentation.Last().Value);
         }
 
         [TestMethod]
@@ -174,9 +174,9 @@ namespace TestAmeffSerializer.V31
 
             var MyModel = new ModelType
             {
-                identifier = "id-1",
-                name = new List<LangStringType> { new LangStringType { Value = "metadata" } },
-                metadata = new MetadataType
+                Identifier = "id-1",
+                Name = new List<LangStringType> { new LangStringType { Value = "metadata" } },
+                Metadata = new MetadataType
                 {
                     Items = new object[]
                     {
@@ -204,9 +204,9 @@ namespace TestAmeffSerializer.V31
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
             Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
-            Assert.IsTrue(Result.Model.metadata.Items.Count() == 1);
+            Assert.IsTrue(Result.Model.Metadata.Items.Count() == 1);
 
-            SchemaInfoType ActualItem1 = Result.Model.metadata.Items.First() as SchemaInfoType;
+            SchemaInfoType ActualItem1 = Result.Model.Metadata.Items.First() as SchemaInfoType;
             XmlElement ActualTitle = ActualItem1.Any.First() as XmlElement;
             XmlElement ActualCreator = ActualItem1.Any.Skip(1).First() as XmlElement;
             Assert.IsTrue(ActualItem1.schema == "schema1");
@@ -231,9 +231,9 @@ namespace TestAmeffSerializer.V31
 
             var MyModel = new ModelType
             {
-                identifier = "id-1",
-                name = new List<LangStringType> { new LangStringType { Value = "metadata" } },
-                metadata = new MetadataType
+                Identifier = "id-1",
+                Name = new List<LangStringType> { new LangStringType { Value = "metadata" } },
+                Metadata = new MetadataType
                 {
                     Items = new object[]
                     {
@@ -256,12 +256,12 @@ namespace TestAmeffSerializer.V31
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
             Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
-            Assert.IsTrue(Result.Model.metadata.Items.Count() == 4);
+            Assert.IsTrue(Result.Model.Metadata.Items.Count() == 4);
 
-            string ActualSchema = Result.Model.metadata.Items.First() as string;
-            string ActualSchemaVersion = Result.Model.metadata.Items.Skip(1).First() as string;
-            XmlElement ActualTitle = Result.Model.metadata.Items.Skip(2).First() as XmlElement;
-            XmlElement ActualCreator = Result.Model.metadata.Items.Skip(3).First() as XmlElement;
+            string ActualSchema = Result.Model.Metadata.Items.First() as string;
+            string ActualSchemaVersion = Result.Model.Metadata.Items.Skip(1).First() as string;
+            XmlElement ActualTitle = Result.Model.Metadata.Items.Skip(2).First() as XmlElement;
+            XmlElement ActualCreator = Result.Model.Metadata.Items.Skip(3).First() as XmlElement;
             Assert.IsTrue(ActualSchema == "schema1");
             Assert.IsTrue(ActualSchemaVersion == "1");
             Assert.IsTrue(ActualTitle.InnerText == ExpectedTitle.InnerText);
@@ -275,79 +275,139 @@ namespace TestAmeffSerializer.V31
             var MyXmlReaderSettings = ReaderSettings(ValidationIssues);
             var Buffer = Serialize(new ModelType
                 {
-                    identifier = "id-1",
-                    name = new List<LangStringType> { new LangStringType { Value = "propertytests" } },
+                    Identifier = "id-1",
+                    Name = new List<LangStringType> { new LangStringType { Value = "propertytests" } },
 
-                    propertyDefinitions = new List<PropertyDefinitionType>
+                    PropertyDefinitions = new List<PropertyDefinitionType>
                     {
                         new PropertyDefinitionType
                         {
-                            identifier = "prop1",
-                            name = new List<LangStringType> { new  LangStringType {  Value = "Property1 (a boolean)"} },
-                            type = DataType.boolean
+                            Identifier = "prop1",
+                            Name = new List<LangStringType> { new  LangStringType {  Value = "Property1 (a boolean)"} },
+                            Type = DataType.Boolean
                         },
                         new PropertyDefinitionType
                         {
-                            identifier = "prop2",
-                            name = new List<LangStringType> { new  LangStringType {  Value = "Property2 (a string)"} },
-                            type = DataType.@string
+                            Identifier = "prop2",
+                            Name = new List<LangStringType> { new  LangStringType {  Value = "Property2 (a string)"} },
+                            Type = DataType.StringText
+                        },
+                        new PropertyDefinitionType
+                        {
+                            Identifier = "prop3",
+                            Name = new List<LangStringType> { new  LangStringType {  Value = "Property3 (a currency)"} },
+                            Type = DataType.Currency
+                        },
+                        new PropertyDefinitionType
+                        {
+                            Identifier = "prop4",
+                            Name = new List<LangStringType> { new  LangStringType {  Value = "Property4 (a date)"} },
+                            Type = DataType.Date
+                        },
+                        new PropertyDefinitionType
+                        {
+                            Identifier = "prop5",
+                            Name = new List<LangStringType> { new  LangStringType {  Value = "Property5 (a number)"} },
+                            Type = DataType.Number
+                        },
+                        new PropertyDefinitionType
+                        {
+                            Identifier = "prop6",
+                            Name = new List<LangStringType> { new  LangStringType {  Value = "Property6 (a time)"} },
+                            Type = DataType.Time
                         }
                     },
-                    properties = new List<PropertyType>
+                    Properties = new List<PropertyType>
                     {
                         new PropertyType
                         {
-                            propertyDefinitionRef = "prop1",
-                            value = new List<LangStringType>
+                            PropertyDefinitionRef = "prop1",
+                            Value = new List<LangStringType>
                             {
-                                new LangStringType { lang = "nl", Value = "waar"},
-                                new LangStringType { lang = "en", Value = "true"}
+                                new LangStringType { Lang = "nl", Value = "waar"},
+                                new LangStringType { Lang = "en", Value = "true"}
                             }
                         },
                         new PropertyType
                         {
-                            propertyDefinitionRef = "prop2",
-                            value = new List<LangStringType>
+                            PropertyDefinitionRef = "prop2",
+                            Value = new List<LangStringType>
                             {
-                                new LangStringType { lang = "nl", Value = "Hello"},
-                                new LangStringType { lang = "en", Value = "World"}
+                                new LangStringType { Lang = "nl", Value = "Hello"},
+                                new LangStringType { Lang = "en", Value = "World"}
+                            }
+                        },
+                        new PropertyType
+                        {
+                            PropertyDefinitionRef = "prop3",
+                            Value = new List<LangStringType>
+                            {
+                                new LangStringType { Lang = "nl", Value = "euro"},
+                                new LangStringType { Value = "pound"}
+                            }
+                        },
+                        new PropertyType
+                        {
+                            PropertyDefinitionRef = "prop4",
+                            Value = new List<LangStringType>
+                            {
+                                new LangStringType { Lang = "nl", Value = "23/12/2020"},
+                                new LangStringType { Lang = "en-us",  Value = "12/23/2020"}
+                            }
+                        },
+                        new PropertyType
+                        {
+                            PropertyDefinitionRef = "prop5",
+                            Value = new List<LangStringType>
+                            {
+                                new LangStringType { Lang = "nl", Value = "1"},
+                                new LangStringType { Lang = "en-us",  Value = "2"}
+                            }
+                        } ,
+                        new PropertyType
+                        {
+                            PropertyDefinitionRef = "prop6",
+                            Value = new List<LangStringType>
+                            {
+                                new LangStringType { Lang = "nl", Value = "12:00"},
+                                new LangStringType { Lang = "en-us",  Value = "23:00"}
                             }
                         }
                     },
-                    elements = new List<ElementType>
+                    Elements = new List<ElementType>
                     {
                         new BusinessActor
                         {
-                            identifier = "actor1",
-                            name = new List<LangStringType> { new LangStringType { Value = "actor1"}},
-                            properties = new List<PropertyType>
+                            Identifier = "actor1",
+                            Name = new List<LangStringType> { new LangStringType { Value = "actor1"}},
+                            Properties = new List<PropertyType>
                             {
                                 new PropertyType
                                 {
-                                    propertyDefinitionRef = "prop1",
-                                    value = new List<LangStringType>
+                                    PropertyDefinitionRef = "prop1",
+                                    Value = new List<LangStringType>
                                     {
-                                        new LangStringType { lang = "nl", Value = "waar"},
-                                        new LangStringType { lang = "en", Value = "true"}
+                                        new LangStringType { Lang = "nl", Value = "waar"},
+                                        new LangStringType { Lang = "en", Value = "true"}
                                     }
                                 }
                             }
                         },
-                        new BusinessActor { identifier = "actor2", name = new List<LangStringType> { new LangStringType { Value = "actor2"}} },
+                        new BusinessActor { Identifier = "actor2", Name = new List<LangStringType> { new LangStringType { Value = "actor2"}} },
                     },
-                    relationships = new List<RelationshipType>
+                    Relationships = new List<RelationshipType>
                     {
                         new Composition
                         {
-                            identifier = "composition1",
-                            source = "actor1",
-                            target = "actor2",
-                            properties = new List<PropertyType>
+                            Identifier = "composition1",
+                            Source = "actor1",
+                            Target = "actor2",
+                            Properties = new List<PropertyType>
                             {
                                 new PropertyType
                                 {
-                                    propertyDefinitionRef = "prop2",
-                                    value = new List<LangStringType>
+                                    PropertyDefinitionRef = "prop2",
+                                    Value = new List<LangStringType>
                                     {
                                         new LangStringType { Value = "Hello World"},
                                      }
@@ -372,60 +432,60 @@ namespace TestAmeffSerializer.V31
             var MyXmlReaderSettings = ReaderSettings(ValidationIssues);
             var Buffer = Serialize(new ModelType
                 {
-                    identifier = "id-1",
-                    name = new List<LangStringType> { new LangStringType { Value = "organizationtests" } },
-                    elements = new List<ElementType>
+                    Identifier = "id-1",
+                    Name = new List<LangStringType> { new LangStringType { Value = "organizationtests" } },
+                    Elements = new List<ElementType>
                     {
-                        new BusinessActor { identifier = "actor1", name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
-                        new BusinessActor { identifier = "actor2", name = new List<LangStringType> { new LangStringType { Value = "actor2"}} },
-                        new BusinessActor { identifier = "actor3", name = new List<LangStringType> { new LangStringType { Value = "actor3"}} },
-                        new BusinessObject { identifier = "object1", name = new List<LangStringType> { new LangStringType { Value = "object1"}} },
-                        new BusinessObject { identifier = "object2", name = new List<LangStringType> { new LangStringType { Value = "object2"}} },
-                        new BusinessObject { identifier = "object3", name = new List<LangStringType> { new LangStringType { Value = "object3"}} },
+                        new BusinessActor { Identifier = "actor1", Name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
+                        new BusinessActor { Identifier = "actor2", Name = new List<LangStringType> { new LangStringType { Value = "actor2"}} },
+                        new BusinessActor { Identifier = "actor3", Name = new List<LangStringType> { new LangStringType { Value = "actor3"}} },
+                        new BusinessObject { Identifier = "object1", Name = new List<LangStringType> { new LangStringType { Value = "object1"}} },
+                        new BusinessObject { Identifier = "object2", Name = new List<LangStringType> { new LangStringType { Value = "object2"}} },
+                        new BusinessObject { Identifier = "object3", Name = new List<LangStringType> { new LangStringType { Value = "object3"}} },
                     },
-                    relationships = new List<RelationshipType>
+                    Relationships = new List<RelationshipType>
                     {
-                        new Association { identifier = "association1", source= "actor1", target = "object1", isDirected = true},
-                        new Association { identifier = "association2", source= "actor1", target = "object1", isDirected = false },
+                        new Association { Identifier = "association1", Source= "actor1", Target = "object1", IsDirected = true},
+                        new Association { Identifier = "association2", Source= "actor1", Target = "object1", IsDirected = false },
                     },
-                    organizations = new List<OrganizationType>
+                    Organizations = new List<OrganizationType>
                     {
                         new OrganizationType
                         {
-                            identifier = "org1",
-                            label = new List<LangStringType> { new LangStringType { Value = "Objects" }  },
-                            documentation = new List<PreservedLangStringType> { new PreservedLangStringType { Value = "This is doc of org1" }  },
-                            item = new List<OrganizationType>
+                            Identifier = "org1",
+                            Label = new List<LangStringType> { new LangStringType { Value = "Objects" }  },
+                            Documentation = new List<PreservedLangStringType> { new PreservedLangStringType { Value = "This is doc of org1" }  },
+                            Item = new List<OrganizationType>
                             {
 
-                                new OrganizationType {  identifierRef = "actor1"},
-                                new OrganizationType {  identifierRef = "actor2"},
-                                new OrganizationType {  identifierRef = "actor3"},
-                                new OrganizationType {  identifierRef = "object1"},
-                                new OrganizationType {  identifierRef = "object2"},
-                                new OrganizationType {  identifierRef = "object3"},
+                                new OrganizationType {  IdentifierRef = "actor1"},
+                                new OrganizationType {  IdentifierRef = "actor2"},
+                                new OrganizationType {  IdentifierRef = "actor3"},
+                                new OrganizationType {  IdentifierRef = "object1"},
+                                new OrganizationType {  IdentifierRef = "object2"},
+                                new OrganizationType {  IdentifierRef = "object3"},
                                 new OrganizationType
                                 {
-                                    identifier = "org1.1",
-                                    label = new List<LangStringType> { new LangStringType { Value = "Even objects" }  },
-                                    documentation = new List<PreservedLangStringType> { new PreservedLangStringType { Value = "This is doc of org1.1" }  },
-                                    item = new List<OrganizationType>
+                                    Identifier = "org1.1",
+                                    Label = new List<LangStringType> { new LangStringType { Value = "Even objects" }  },
+                                    Documentation = new List<PreservedLangStringType> { new PreservedLangStringType { Value = "This is doc of org1.1" }  },
+                                    Item = new List<OrganizationType>
                                     {
-                                        new OrganizationType {  identifierRef = "actor2"},
-                                        new OrganizationType {  identifierRef = "object2"}
+                                        new OrganizationType {  IdentifierRef = "actor2"},
+                                        new OrganizationType {  IdentifierRef = "object2"}
                                     }
                                 },
                             }
                         },
                         new OrganizationType
                         {
-                            identifier = "org2",
-                            label = new List<LangStringType> { new LangStringType { Value = "Relationships" }  },
-                            documentation = new List<PreservedLangStringType> { new PreservedLangStringType { Value = "This is doc of org2" }  },
-                            item = new List<OrganizationType>
+                            Identifier = "org2",
+                            Label = new List<LangStringType> { new LangStringType { Value = "Relationships" }  },
+                            Documentation = new List<PreservedLangStringType> { new PreservedLangStringType { Value = "This is doc of org2" }  },
+                            Item = new List<OrganizationType>
                             {
-                                new OrganizationType {  identifierRef = "association1"},
-                                new OrganizationType {  identifierRef = "association2"}
+                                new OrganizationType {  IdentifierRef = "association1"},
+                                new OrganizationType {  IdentifierRef = "association2"}
                             }
                         }
                     }
@@ -435,10 +495,10 @@ namespace TestAmeffSerializer.V31
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
             Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
-            Assert.IsTrue(Result.Model.organizations.Count() == 2);
-            Assert.IsTrue(Result.Model.organizations.First().item.Count() == 7);
-            Assert.IsTrue(Result.Model.organizations.First().item.Last().item.Count() == 2);
-            Assert.IsTrue(Result.Model.organizations.Last().item.Count() == 2);
+            Assert.IsTrue(Result.Model.Organizations.Count() == 2);
+            Assert.IsTrue(Result.Model.Organizations.First().Item.Count() == 7);
+            Assert.IsTrue(Result.Model.Organizations.First().Item.Last().Item.Count() == 2);
+            Assert.IsTrue(Result.Model.Organizations.Last().Item.Count() == 2);
         }
 
         [TestMethod]
@@ -449,91 +509,143 @@ namespace TestAmeffSerializer.V31
 
             var OrgViewPoint = new ViewpointType
             {
-                identifier = "viewpoint1",
-                name = new List<LangStringType> { new LangStringType { Value = "Custom viewpoint 1" } },
-                concern = new List<ConcernType>
+                Identifier = "viewpoint1",
+                Name = new List<LangStringType> { new LangStringType { Value = "Custom viewpoint 1" } },
+                ModelingNotes = new List<ModelingNoteType>
+                {
+                    new ModelingNoteType
+                    {
+                        Documentation = new List<PreservedLangStringType>
+                        {
+                            new PreservedLangStringType
+                            {
+                                Value = "documentation on modeling note"
+                            }
+                        },
+                        Type = " type of modeling note"
+                    }
+                },
+                Properties = new List<PropertyType>
+                {
+                    new PropertyType
+                    {
+                        PropertyDefinitionRef = "prop1",
+                        Value = new List<LangStringType> { new LangStringType { Value = "Property value on a viewpoint" } }
+                    }
+                },
+                Concerns = new List<ConcernType>
                 {
                     new ConcernType
                     {
-                        label = new List<LangStringType>
+                        Label = new List<LangStringType>
                         {
                             new LangStringType { Value = "Identification of competencies, authority, and responsibilities" }
                         },
-                        stakeholders = new List<StakeholderType>
+                        Documentation = new List<PreservedLangStringType>
+                        {
+                            new PreservedLangStringType
+                            {
+                                Value = "default language Documentation on this concern"
+                            },
+                            new PreservedLangStringType
+                            {
+                                Lang = "en-us",
+                                Value = "en-us documentation on this concern"
+                            },
+                        },
+                        Stakeholders = new List<StakeholderType>
                         {
                             new StakeholderType
                             {
-                                label = new List<LangStringType> { new LangStringType {  Value = "Enterprise" } }
+                                Label = new List<LangStringType> { new LangStringType {  Value = "Enterprise" } }
                             },
                             new StakeholderType
                             {
-                                label = new List<LangStringType> { new LangStringType {  Value = "process and domain architects" } }
+                                Label = new List<LangStringType> { new LangStringType {  Value = "process and domain architects" } }
                             },
                             new StakeholderType
                             {
-                                label = new List<LangStringType> { new LangStringType {  Value = "managers" } }
+                                Label = new List<LangStringType> { new LangStringType {  Value = "managers" } }
                             },
                             new StakeholderType
                             {
-                                label = new List<LangStringType> { new LangStringType {  Value = "employees" } }
+                                Label = new List<LangStringType> { new LangStringType {  Value = "employees" } }
                             },
                             new StakeholderType
                             {
-                                label = new List<LangStringType> { new LangStringType {  Value = "shareholders" } }
+                                Label = new List<LangStringType> { new LangStringType {  Value = "shareholders" } }
                             }
+                        },
+                    },
+                    new ConcernType
+                    {
+                        Label = new List<LangStringType>
+                        {
+                            new LangStringType { Value = "2nd test concern" }
                         },
                     }
                 },
-                allowedElementType = new List<AllowedElementTypeType>
+                ViewpointContent = "Overview",
+                ViewpointPurpose = "Designing",
+                AllowedElementTypes = new List<AllowedElementTypeType>
                 {
-                    new AllowedElementTypeType { type = typeof(BusinessActor).Name},
-                    new AllowedElementTypeType { type = typeof(BusinessRole).Name},
-                    new AllowedElementTypeType { type = typeof(BusinessCollaboration).Name},
-                    new AllowedElementTypeType { type = typeof(Location).Name},
-                    new AllowedElementTypeType { type = typeof(BusinessInterface).Name},
+                    new AllowedElementTypeType { Type = typeof(BusinessActor).Name},
+                    new AllowedElementTypeType { Type = typeof(BusinessRole).Name},
+                    new AllowedElementTypeType { Type = typeof(BusinessCollaboration).Name},
+                    new AllowedElementTypeType { Type = typeof(Location).Name},
+                    new AllowedElementTypeType { Type = typeof(BusinessInterface).Name},
                 },
-                allowedRelationshipType = new List<AllowedRelationshipTypeType>
+                AllowedRelationshipTypes = new List<AllowedRelationshipTypeType>
                 {
-                    new AllowedRelationshipTypeType { type = RelationshipTypeEnum.Composition},
-                    new AllowedRelationshipTypeType { type = RelationshipTypeEnum.Association}
+                    new AllowedRelationshipTypeType { Type = RelationshipTypeEnum.Composition},
+                    new AllowedRelationshipTypeType { Type = RelationshipTypeEnum.Association}
                 }
             };
 
             var Buffer = Serialize(
                 new ModelType
                 {
-                    identifier = "id-1",
-                    name = new List<LangStringType> { new LangStringType { Value = "viewpointtest" } },
-                    elements = new List<ElementType>
+                    Identifier = "id-1",
+                    Name = new List<LangStringType> { new LangStringType { Value = "viewpointtest" } },
+                    PropertyDefinitions = new List<PropertyDefinitionType>
                     {
-                        new BusinessActor { identifier = "actor1", name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
-                        new BusinessActor { identifier = "actor2", name = new List<LangStringType> { new LangStringType { Value = "actor2"}} },
-                        new BusinessActor { identifier = "actor3", name = new List<LangStringType> { new LangStringType { Value = "actor3"}} },
+                        new PropertyDefinitionType
+                        {
+                            Identifier = "prop1",
+                            Name = new List<LangStringType> { new LangStringType { Value = "prop1" } },
+                            Type = DataType.StringText
+                        }
                     },
-                    relationships = new List<RelationshipType>
+                    Elements = new List<ElementType>
                     {
-                        new Composition { identifier = "composition1", source= "actor1", target = "actor2"},
-                        new Composition { identifier = "ccomposition2", source= "actor2", target = "actor3"},
+                        new BusinessActor { Identifier = "actor1", Name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
+                        new BusinessActor { Identifier = "actor2", Name = new List<LangStringType> { new LangStringType { Value = "actor2"}} },
+                        new BusinessActor { Identifier = "actor3", Name = new List<LangStringType> { new LangStringType { Value = "actor3"}} },
                     },
-                    views = new ViewsType
+                    Relationships = new List<RelationshipType>
                     {
-                        viewpoints = new List<ViewpointType>
+                        new Composition { Identifier = "composition1", Source= "actor1", Target = "actor2"},
+                        new Composition { Identifier = "ccomposition2", Source= "actor2", Target = "actor3"},
+                    },
+                    Views = new ViewsType
+                    {
+                        Viewpoints = new List<ViewpointType>
                         {
                            OrgViewPoint
                         },
-                        diagrams = new List<Diagram>
+                        Diagrams = new List<Diagram>
                         {
                             new Diagram
                             {
-                                identifier = "view1",
-                                name  = new List<LangStringType> { new LangStringType { Value = "View1"} },
-                                viewpointRef = OrgViewPoint.identifier,
+                                Identifier = "view1",
+                                Name  = new List<LangStringType> { new LangStringType { Value = "View1"} },
+                                ViewpointRef = OrgViewPoint.Identifier,
                             },
                             new Diagram
                             {
-                                identifier = "view2",
-                                name  = new List<LangStringType> { new LangStringType { Value = "View2"} },
-                                viewpoint = "Application Cooperation",
+                                Identifier = "view2",
+                                Name  = new List<LangStringType> { new LangStringType { Value = "View2"} },
+                                Viewpoint = "Application Cooperation",
                             }
                         }
                     }
@@ -552,87 +664,87 @@ namespace TestAmeffSerializer.V31
             var MyXmlReaderSettings = ReaderSettings(ValidationIssues);
             var MyModel = new ModelType
             {
-                identifier = "id-1",
-                name = new List<LangStringType> { new LangStringType { Value = "diagramtest" } },
-                elements = new List<ElementType>
+                Identifier = "id-1",
+                Name = new List<LangStringType> { new LangStringType { Value = "diagramtest" } },
+                Elements = new List<ElementType>
                     {
-                        new BusinessActor { identifier = "actor1", name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
-                        new BusinessActor { identifier = "actor2", name = new List<LangStringType> { new LangStringType { Value = "actor2"}} },
-                        new BusinessActor { identifier = "actor3", name = new List<LangStringType> { new LangStringType { Value = "actor3"}} },
+                        new BusinessActor { Identifier = "actor1", Name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
+                        new BusinessActor { Identifier = "actor2", Name = new List<LangStringType> { new LangStringType { Value = "actor2"}} },
+                        new BusinessActor { Identifier = "actor3", Name = new List<LangStringType> { new LangStringType { Value = "actor3"}} },
                     },
-                relationships = new List<RelationshipType>
+                Relationships = new List<RelationshipType>
                     {
-                        new Composition { identifier = "composition1", source= "actor1", target = "actor2"},
-                        new Composition { identifier = "composition2", source= "actor2", target = "actor3"},
+                        new Composition { Identifier = "composition1", Source= "actor1", Target = "actor2"},
+                        new Composition { Identifier = "composition2", Source= "actor2", Target = "actor3"},
                     },
-                views = new ViewsType
+                Views = new ViewsType
                 {
-                    diagrams = new List<Diagram>
+                    Diagrams = new List<Diagram>
                         {
                             new Diagram
                             {
-                                identifier = "view1",
-                                name  = new List<LangStringType> { new LangStringType { Value = "View1"} },
-                                node = new List<ViewNodeType>
+                                Identifier = "view1",
+                                Name  = new List<LangStringType> { new LangStringType { Value = "View1"} },
+                                Nodes = new List<ViewNodeType>
                                 {
                                     new Container
                                     {
-                                        identifier = "node1",
-                                        label = new List<LangStringType> { new LangStringType { Value = "Group that holds nodes"} },
+                                        Identifier = "node1",
+                                        Label = new List<LangStringType> { new LangStringType { Value = "Group that holds nodes"} },
                                         X = 0,
                                         Y = 0,
                                         W = 577,
                                         H = 301,
-                                        style = new StyleType
+                                        Style = new StyleType
                                         {
-                                            fillColor = new RGBColorType
+                                            FillColor = new RGBColorType
                                             {
                                                 R = 209,
                                                 G = 209,
                                                 B = 207,
                                             },
-                                            lineColor = new RGBColorType
+                                            LineColor = new RGBColorType
                                             {
                                                 R = 255,
                                                 G = 0,
                                                 B = 0,
                                             },
-                                            lineWidth = "5",
-                                            font = new FontType
+                                            LineWidth = "5",
+                                            Font = new FontType
                                             {
-                                                color = new RGBColorType
+                                                Color = new RGBColorType
                                                 {
                                                     R = 255,
                                                     G = 255,
                                                     B = 255,
                                                 },
-                                                name = "Lato",
-                                                size = 13.5M,
-                                                style = new List<FontStyleEnum> { FontStyleEnum.bold, FontStyleEnum.italic, FontStyleEnum.underline }
+                                                Name = "Lato",
+                                                Size = 13.5M,
+                                                Style = new List<FontStyleEnum> { FontStyleEnum.bold, FontStyleEnum.italic, FontStyleEnum.underline }
                                             }
                                         },
-                                        node = new List<ViewNodeType>
+                                        Nodes = new List<ViewNodeType>
                                         {
                                             new Element
                                             {
-                                                identifier="node1.1",
+                                                Identifier="node1.1",
                                                 W = 144,
                                                 H = 60,
                                                 X = 108,
                                                 Y = 132,
-                                                elementRef = "actor1",
-                                                style = new StyleType
+                                                ElementRef = "actor1",
+                                                Style = new StyleType
                                                 {
-                                                    fillColor = new RGBColorType
+                                                    FillColor = new RGBColorType
                                                     {
                                                         R = 252,
                                                         G = 193,
                                                         B = 61,
                                                         A = 30
                                                     },
-                                                    font = new FontType
+                                                    Font = new FontType
                                                     {
-                                                        color = new RGBColorType
+                                                        Color = new RGBColorType
                                                         {
                                                             R = 0,
                                                             G = 0,
@@ -644,32 +756,32 @@ namespace TestAmeffSerializer.V31
                                             },
                                             new Element
                                             {
-                                                identifier="node1.2",
+                                                Identifier="node1.2",
                                                 W = 144,
                                                 H = 60,
                                                 X = 312,
                                                 Y = 132,
-                                                elementRef = "actor2",
+                                                ElementRef = "actor2",
                                             }
                                         }
 
                                     }
 
                                 },
-                                connection = new List<ConnectionType>
+                                Connections = new List<ConnectionType>
                                 {
                                     new Relationship
                                     {
-                                        identifier = "r1",
-                                        relationshipRef = "composition1",
-                                        source = "node1.1",
-                                        target = "node1.2",
-                                        sourceAttachment = new LocationType
+                                        Identifier = "r1",
+                                        RelationshipRef = "composition1",
+                                        Source = "node1.1",
+                                        Target = "node1.2",
+                                        SourceAttachment = new LocationType
                                         {
                                             X = 108,
                                             Y = 162
                                         },
-                                        bendpoint = new List<LocationType>
+                                        Bendpoints = new List<LocationType>
                                         {
                                             new LocationType
                                             {
@@ -693,8 +805,8 @@ namespace TestAmeffSerializer.V31
                             },
                             new Diagram
                             {
-                                identifier = "view2",
-                                name  = new List<LangStringType> { new LangStringType { Value = "View2"} },
+                                Identifier = "view2",
+                                Name  = new List<LangStringType> { new LangStringType { Value = "View2"} },
                             }
                         }
                 }
@@ -715,17 +827,17 @@ namespace TestAmeffSerializer.V31
             var Buffer = Serialize(
                 new ModelType
                 {
-                    identifier = "id-1",
-                    name = new List<LangStringType> { new LangStringType { Value = "associationtest" } },
-                    elements = new List<ElementType>
+                    Identifier = "id-1",
+                    Name = new List<LangStringType> { new LangStringType { Value = "associationtest" } },
+                    Elements = new List<ElementType>
                     {
-                        new BusinessActor { identifier = "actor1", name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
-                        new BusinessObject { identifier = "object1", name = new List<LangStringType> { new LangStringType { Value = "object1"}} },
+                        new BusinessActor { Identifier = "actor1", Name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
+                        new BusinessObject { Identifier = "object1", Name = new List<LangStringType> { new LangStringType { Value = "object1"}} },
                     },
-                    relationships = new List<RelationshipType>
+                    Relationships = new List<RelationshipType>
                     {
-                        new Association { identifier = "association1", source= "actor1", target = "object1", isDirected = true},
-                        new Association { identifier = "association2", source= "actor1", target = "object1", isDirected = false },
+                        new Association { Identifier = "association1", Source= "actor1", Target = "object1", IsDirected = true},
+                        new Association { Identifier = "association2", Source= "actor1", Target = "object1", IsDirected = false },
                     }
                 }
                 , TempFileName(string.Empty)
@@ -733,8 +845,8 @@ namespace TestAmeffSerializer.V31
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
             Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
-            Assert.IsTrue(Result.Model.relationships.OfType<Association>().First().isDirected);
-            Assert.IsFalse(Result.Model.relationships.OfType<Association>().Last().isDirected);
+            Assert.IsTrue(Result.Model.Relationships.OfType<Association>().First().IsDirected);
+            Assert.IsFalse(Result.Model.Relationships.OfType<Association>().Last().IsDirected);
             Assert.IsFalse(Result.Xml.Contains("isDirected=\"false\""));
         }
 
@@ -746,17 +858,17 @@ namespace TestAmeffSerializer.V31
             var Buffer = Serialize(
                 new ModelType
                 {
-                    identifier = "id-1",
-                    name = new List<LangStringType> { new LangStringType { Value = "accesstest" } },
-                    elements = new List<ElementType>
+                    Identifier = "id-1",
+                    Name = new List<LangStringType> { new LangStringType { Value = "accesstest" } },
+                    Elements = new List<ElementType>
                     {
-                        new BusinessActor { identifier = "actor1", name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
-                        new BusinessObject { identifier = "object1", name = new List<LangStringType> { new LangStringType { Value = "object1"}} },
+                        new BusinessActor { Identifier = "actor1", Name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
+                        new BusinessObject { Identifier = "object1", Name = new List<LangStringType> { new LangStringType { Value = "object1"}} },
                     },
-                    relationships = new List<RelationshipType>
+                    Relationships = new List<RelationshipType>
                     {
-                        new Access { identifier = "access1", source= "actor1", target = "object1", accessType = AccessTypeEnum.ReadWrite },
-                        new Access { identifier = "access2", source= "actor1", target = "object1" },
+                        new Access { Identifier = "access1", Source= "actor1", Target = "object1", AccessType = AccessTypeEnum.ReadWrite },
+                        new Access { Identifier = "access2", Source= "actor1", Target = "object1" },
                     }
                 }
                 , TempFileName(string.Empty)
@@ -764,8 +876,8 @@ namespace TestAmeffSerializer.V31
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
             Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
-            Assert.IsTrue(Result.Model.relationships.OfType<Access>().First().accessType == AccessTypeEnum.ReadWrite);
-            Assert.IsTrue(Result.Model.relationships.OfType<Access>().Last().accessType == AccessTypeEnum.Access);
+            Assert.IsTrue(Result.Model.Relationships.OfType<Access>().First().AccessType == AccessTypeEnum.ReadWrite);
+            Assert.IsTrue(Result.Model.Relationships.OfType<Access>().Last().AccessType == AccessTypeEnum.Access);
             Assert.IsTrue(Result.Xml.Contains("accessType=\"ReadWrite\""));
             Assert.IsFalse(Result.Xml.Contains("accessType=\"Access\""));
         }
@@ -778,17 +890,17 @@ namespace TestAmeffSerializer.V31
             var Buffer = Serialize(
                 new ModelType
                  {
-                     identifier = "id-1",
-                     name = new List<LangStringType> { new LangStringType { Value = "influencetest" } },
-                     elements = new List<ElementType>
+                     Identifier = "id-1",
+                     Name = new List<LangStringType> { new LangStringType { Value = "influencetest" } },
+                     Elements = new List<ElementType>
                         {
-                            new BusinessActor { identifier = "actor1", name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
-                            new BusinessObject { identifier = "object1", name = new List<LangStringType> { new LangStringType { Value = "object1"}} },
+                            new BusinessActor { Identifier = "actor1", Name = new List<LangStringType> { new LangStringType { Value = "actor1"}} },
+                            new BusinessObject { Identifier = "object1", Name = new List<LangStringType> { new LangStringType { Value = "object1"}} },
                         },
-                     relationships = new List<RelationshipType>
+                     Relationships = new List<RelationshipType>
                         {
-                            new Influence { identifier = "inf1", source= "actor1", target = "object1", modifier = "++" },
-                            new Influence { identifier = "inf2", source= "actor1", target = "object1" },
+                            new Influence { Identifier = "inf1", Source= "actor1", Target = "object1", Modifier = "++" },
+                            new Influence { Identifier = "inf2", Source= "actor1", Target = "object1" },
                         }
                 }
                 , TempFileName(string.Empty)
@@ -796,8 +908,8 @@ namespace TestAmeffSerializer.V31
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
             Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
-            Assert.IsTrue(Result.Model.relationships.OfType<Influence>().First().modifier == "++");
-            Assert.IsTrue(Result.Model.relationships.OfType<Influence>().Last().modifier == null);
+            Assert.IsTrue(Result.Model.Relationships.OfType<Influence>().First().Modifier == "++");
+            Assert.IsTrue(Result.Model.Relationships.OfType<Influence>().Last().Modifier == null);
             Assert.IsTrue(Result.Xml.Contains("modifier=\"++\""));
             Assert.IsFalse(Result.Xml.Contains("modifier=\"\""));
         }

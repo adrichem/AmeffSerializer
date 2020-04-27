@@ -1,27 +1,30 @@
 ﻿namespace Adrichem.Serialization.Ameff.V31.Diagram
 {
     using System.Collections.Generic;
+    using System.Xml.Serialization;
 
-    [System.Xml.Serialization.XmlInclude(typeof(SourcedConnectionType))]
-    [System.Xml.Serialization.XmlInclude(typeof(Relationship))]
-    [System.Xml.Serialization.XmlInclude(typeof(NestingRelationship))]
-    [System.Xml.Serialization.XmlInclude(typeof(Line))]
+    [XmlInclude(typeof(SourcedConnectionType))]
+    [XmlInclude(typeof(Relationship))]
+    [XmlInclude(typeof(NestingRelationship))]
+    [XmlInclude(typeof(Line))]
     [System.Serializable()]
-    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ConnectionType : ViewConceptType
     {
-        public LocationType sourceAttachment { get; set; }
+        [XmlElement("sourceAttachment")]
+        public LocationType SourceAttachment { get; set; }
 
-        [System.Xml.Serialization.XmlElement("bendpoint")]
-        public List<LocationType> bendpoint { get; set; }
+        [XmlElement("bendpoint")]
+        public List<LocationType> Bendpoints { get; set; }
 
-        public LocationType targetAttachment { get; set; }
+        [XmlElement("targetAttachment")]
+        public LocationType TargetAttachment { get; set; }
        
-        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
-        public string source { get; set; }
+        [XmlAttribute(AttributeName = "source", DataType = "IDREF")]
+        public string Source { get; set; }
 
-        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
-        public string target { get; set; }
+        [XmlAttribute(AttributeName = "target", DataType = "IDREF")]
+        public string Target { get; set; }
 
     }
 }

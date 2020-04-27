@@ -1,35 +1,38 @@
 ﻿namespace Adrichem.Serialization.Ameff.V31.Diagram
 {
     using System.Collections.Generic;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     [System.Serializable()]
-    [System.Xml.Serialization.XmlInclude(typeof(ConnectionType))]
-    [System.Xml.Serialization.XmlInclude(typeof(SourcedConnectionType))]
-    [System.Xml.Serialization.XmlInclude(typeof(Relationship))]
-    [System.Xml.Serialization.XmlInclude(typeof(NestingRelationship))]
-    [System.Xml.Serialization.XmlInclude(typeof(Line))]
-    [System.Xml.Serialization.XmlInclude(typeof(ViewNodeType))]
-    [System.Xml.Serialization.XmlInclude(typeof(Container))]
-    [System.Xml.Serialization.XmlInclude(typeof(Element))]
-    [System.Xml.Serialization.XmlInclude(typeof(Label))]
-    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [XmlInclude(typeof(ConnectionType))]
+    [XmlInclude(typeof(SourcedConnectionType))]
+    [XmlInclude(typeof(Relationship))]
+    [XmlInclude(typeof(NestingRelationship))]
+    [XmlInclude(typeof(Line))]
+    [XmlInclude(typeof(ViewNodeType))]
+    [XmlInclude(typeof(Container))]
+    [XmlInclude(typeof(Element))]
+    [XmlInclude(typeof(Label))]
+    [XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ViewConceptType
     {
-        [System.Xml.Serialization.XmlElement("label")]
-        public List<LangStringType> label { get; set; }
+        [XmlElement("label")]
+        public List<LangStringType> Label { get; set; }
 
-        [System.Xml.Serialization.XmlElement("documentation")]
-        public List<PreservedLangStringType> documentation { get; set; }
+        [XmlElement("documentation")]
+        public List<PreservedLangStringType> Documentation { get; set; }
 
-        public StyleType style { get; set; }
+        [XmlElement("style")]
+        public StyleType Style { get; set; }
 
-        [System.Xml.Serialization.XmlElement("viewRef")]
-        public List<ReferenceType> viewRef { get; set; }
+        [XmlElement("viewRef")]
+        public List<ReferenceType> ViewRefs { get; set; }
 
-        [System.Xml.Serialization.XmlAttribute(DataType = "ID")]
-        public string identifier { get; set; }
+        [XmlAttribute(AttributeName = "identifier", DataType = "ID")]
+        public string Identifier { get; set; }
 
-        [System.Xml.Serialization.XmlAnyAttribute()]
-        public List<System.Xml.XmlAttribute> AnyAttr { get; set; }
+        [XmlAnyAttribute()]
+        public List<XmlAttribute> AnyAttr { get; set; }
     }
 }

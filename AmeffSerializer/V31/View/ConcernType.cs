@@ -1,27 +1,21 @@
 ﻿namespace Adrichem.Serialization.Ameff.V31.View
 {
     using System.Collections.Generic;
-
+    using System.Xml.Serialization;
 
     [System.Serializable()]
-    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class ConcernType
     {
-        public ConcernType()
-        {
-            this.stakeholders = new List<StakeholderType>();
-            this.documentation = new List<PreservedLangStringType>();
-            this.label = new List<LangStringType>();
-        }
+        [XmlElement("label")]
+        public List<LangStringType> Label { get; set; }
 
-        [System.Xml.Serialization.XmlElement("label")]
-        public List<LangStringType> label { get; set; }
+        [XmlElement("documentation")]
+        public List<PreservedLangStringType> Documentation { get; set; }
 
-        [System.Xml.Serialization.XmlElement("documentation")]
-        public List<PreservedLangStringType> documentation { get; set; }
-
-        [System.Xml.Serialization.XmlArrayItem("stakeholder", IsNullable = false)]
-        public List<StakeholderType> stakeholders { get; set; }
+        [XmlArray("stakeholders")]
+        [XmlArrayItem("stakeholder", IsNullable = false)]
+        public List<StakeholderType> Stakeholders { get; set; }
     }
 
 }

@@ -1,26 +1,27 @@
 ﻿namespace Adrichem.Serialization.Ameff.V31.Diagram
 {
     using System.Collections.Generic;
+    using System.Xml.Serialization;
 
     [System.Serializable()]
-    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class FontType
     {
-        [System.Xml.Serialization.XmlElement(ElementName = "color")]
-        public RGBColorType color { get; set; }
+        [XmlElement(ElementName = "color")]
+        public RGBColorType Color { get; set; }
 
-        [System.Xml.Serialization.XmlAttribute(AttributeName = "name")]
-        public string name { get; set; }
+        [XmlAttribute(AttributeName = "name")]
+        public string Name { get; set; }
 
-        [System.Xml.Serialization.XmlAttribute(AttributeName = "size")]
-        public decimal size { get; set; }
+        [XmlAttribute(AttributeName = "size")]
+        public decimal Size { get; set; }
 
-        [System.Xml.Serialization.XmlAttribute(AttributeName = "style")]
-        public List<FontStyleEnum> style { get; set; }
+        [XmlAttribute(AttributeName = "style")]
+        public List<FontStyleEnum> Style { get; set; }
 
-        public bool ShouldSerializesize()
+        public bool ShouldSerializeSize()
         {
-            return size > 0;
+            return Size > 0;
         }
     }
 }

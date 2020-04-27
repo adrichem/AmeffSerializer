@@ -1,13 +1,15 @@
 ﻿namespace Adrichem.Serialization.Ameff.V31.Diagram
 {
+    using System.Xml.Serialization;
+
     [System.Serializable()]
-    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class Label : ViewNodeType
     {
-        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
-        public string conceptRef { get; set; }
+        [XmlAttribute(AttributeName = "conceptRef", DataType = "IDREF")]
+        public string ConceptRef { get; set; }
 
-        [System.Xml.Serialization.XmlAttribute(DataType = "token")]
-        public string xpathPart { get; set; }
+        [XmlAttribute(AttributeName = "xpathPart", DataType = "token")]
+        public string XpathPart { get; set; }
     }
 }

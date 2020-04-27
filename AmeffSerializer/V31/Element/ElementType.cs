@@ -65,7 +65,6 @@
     [System.Xml.Serialization.XmlInclude(typeof(BusinessCollaboration))]
     [System.Xml.Serialization.XmlInclude(typeof(BusinessRole))]
     [System.Xml.Serialization.XmlInclude(typeof(BusinessActor))]
-
     [System.Serializable()]
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ElementType : ConceptType

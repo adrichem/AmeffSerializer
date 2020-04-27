@@ -7,22 +7,22 @@
     public partial class OrganizationType
     {
         [System.Xml.Serialization.XmlElement("label")]
-        public List<LangStringType> label { get; set; }
+        public List<LangStringType> Label { get; set; }
 
         [System.Xml.Serialization.XmlElement("documentation")]
-        public List<PreservedLangStringType> documentation { get; set; }
+        public List<PreservedLangStringType> Documentation { get; set; }
 
         [System.Xml.Serialization.XmlElement("item")]
-        public List<OrganizationType> item { get; set; }
+        public List<OrganizationType> Item { get; set; }
 
         [System.Xml.Serialization.XmlAnyElement()]
         public List<System.Xml.XmlElement> Any { get; set; }
         
-        [System.Xml.Serialization.XmlAttribute(DataType = "ID")] 
-        public string identifier { get; set; }
+        [System.Xml.Serialization.XmlAttribute(AttributeName = "identifier", DataType = "ID")] 
+        public string Identifier { get; set; }
         
-        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
-        public string identifierRef { get; set; }
+        [System.Xml.Serialization.XmlAttribute(AttributeName = "identifierRef", DataType = "IDREF")]
+        public string IdentifierRef { get; set; }
 
         [System.Xml.Serialization.XmlAnyAttribute()]
         public List<System.Xml.XmlAttribute> AnyAttr { get; set; }

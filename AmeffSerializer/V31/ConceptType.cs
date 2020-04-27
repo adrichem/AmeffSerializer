@@ -86,7 +86,8 @@
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public abstract partial class ConceptType : ReferenceableType
     {
+        [System.Xml.Serialization.XmlArray("properties")]
         [System.Xml.Serialization.XmlArrayItem("property", IsNullable = false)]
-        public List<PropertyType> properties { get; set; }
+        public List<PropertyType> Properties { get; set; }
     }
 }

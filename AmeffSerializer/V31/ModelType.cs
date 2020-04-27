@@ -2,35 +2,43 @@
 {
     using Element;
     using Relationship;
-    using View;
     using System.Collections.Generic;
-    
+    using System.Xml.Serialization;
+    using View;
+
     [System.Serializable()]
-    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
-    [System.Xml.Serialization.XmlRoot("model", Namespace = "http://www.opengroup.org/xsd/archimate/3.0/", IsNullable = false)]
+    [XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [XmlRoot("model", Namespace = "http://www.opengroup.org/xsd/archimate/3.0/", IsNullable = false)]
     public partial class ModelType : NamedReferenceableType
     {
-        [System.Xml.Serialization.XmlArrayItem("property", IsNullable = false)]
-        public List<PropertyType> properties { get; set; }
-        
-        public MetadataType metadata { get; set; }
-        
-        [System.Xml.Serialization.XmlArrayItem("element", IsNullable = false)]
-        public List<ElementType> elements { get; set; }
+        [XmlArray("properties")]
+        [XmlArrayItem("property", IsNullable = false)]
+        public List<PropertyType> Properties { get; set; }
 
-        [System.Xml.Serialization.XmlArrayItem("relationship", IsNullable = false)]
-        public List<RelationshipType> relationships { get; set; }
+        [XmlElement("metadata")]
+        public MetadataType Metadata { get; set; }
 
-        [System.Xml.Serialization.XmlArrayItem("item", typeof(OrganizationType), IsNullable = false)]
-        public List<OrganizationType> organizations { get; set; }
+        [XmlArray("elements")]
+        [XmlArrayItem("element", IsNullable = false)]
+        public List<ElementType> Elements { get; set; }
 
-        [System.Xml.Serialization.XmlArrayItem("propertyDefinition", IsNullable = false)]
-        public List<PropertyDefinitionType> propertyDefinitions { get; set; }
+        [XmlArray("relationships")]
+        [XmlArrayItem("relationship", IsNullable = false)]
+        public List<RelationshipType> Relationships { get; set; }
 
-        public ViewsType views { get; set; }
+        [XmlArray("organizations")]
+        [XmlArrayItem("item", typeof(OrganizationType), IsNullable = false)]
+        public List<OrganizationType> Organizations { get; set; }
 
-        [System.Xml.Serialization.XmlAttribute()]
-        public string version { get; set; }
+        [XmlArray("propertyDefinitions")]
+        [XmlArrayItem("propertyDefinition", IsNullable = false)]
+        public List<PropertyDefinitionType> PropertyDefinitions { get; set; }
+
+        [XmlElement("views")]
+        public ViewsType Views { get; set; }
+
+        [XmlAttribute(AttributeName="version")]
+        public string Version { get; set; }
     }
 
 }

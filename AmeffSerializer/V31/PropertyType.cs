@@ -6,16 +6,11 @@
     [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class PropertyType
     {
-        public PropertyType()
-        {
-            this.value = new List<LangStringType>();
-        }
 
         [System.Xml.Serialization.XmlElement("value")]
-        public List<LangStringType> value { get; set; }
+        public List<LangStringType> Value { get; set; }
         
-
-        [System.Xml.Serialization.XmlAttribute(DataType = "IDREF")]
-        public string propertyDefinitionRef { get; set; }
+        [System.Xml.Serialization.XmlAttribute(AttributeName = "propertyDefinitionRef", DataType = "IDREF")]
+        public string PropertyDefinitionRef { get; set; }
     }
 }

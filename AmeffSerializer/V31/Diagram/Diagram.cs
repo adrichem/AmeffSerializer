@@ -2,23 +2,17 @@
 {
     using View;
     using System.Collections.Generic;
+    using System.Xml.Serialization;
 
     [System.Serializable()]
-    [System.Xml.Serialization.XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
+    [XmlType(Namespace = "http://www.opengroup.org/xsd/archimate/3.0/")]
     public partial class Diagram : ViewType
     {
+        [XmlElement("node")]
+        public List<ViewNodeType> Nodes { get; set; }
 
-        public Diagram()
-        {
-            this.connection = new List<ConnectionType>();
-            this.node = new List<ViewNodeType>();
-        }
-
-        [System.Xml.Serialization.XmlElement("node")]
-        public List<ViewNodeType> node { get; set; }
-
-        [System.Xml.Serialization.XmlElement("connection")]
-        public List<ConnectionType> connection { get; set; }
+        [XmlElement("connection")]
+        public List<ConnectionType> Connections { get; set; }
 
     }
 }
