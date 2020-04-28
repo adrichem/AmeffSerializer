@@ -6,12 +6,12 @@
     {
         public Access()
         {
-            this.AccessType = AccessTypeEnum.Access;
+            this.AccessType = AccessType.Access;
         }
 
         [System.Xml.Serialization.XmlAttribute(AttributeName = "accessType")]
-        [System.ComponentModel.DefaultValue(AccessTypeEnum.Access)]
-        public AccessTypeEnum AccessType { get; set; }
+        [System.ComponentModel.DefaultValue(AccessType.Access)]
+        public AccessType AccessType { get; set; }
        
     }
 }

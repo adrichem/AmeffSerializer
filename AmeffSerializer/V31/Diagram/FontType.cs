@@ -8,7 +8,7 @@
     public partial class FontType
     {
         [XmlElement(ElementName = "color")]
-        public RGBColorType Color { get; set; }
+        public RgbColorType Color { get; set; }
 
         [XmlAttribute(AttributeName = "name")]
         public string Name { get; set; }
@@ -17,7 +17,7 @@
         public decimal Size { get; set; }
 
         [XmlAttribute(AttributeName = "style")]
-        public List<FontStyleEnum> Style { get; set; }
+        public List<FontStyle> Style { get; set; }
 
         public bool ShouldSerializeSize()
         {

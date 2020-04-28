@@ -6,7 +6,7 @@
     using System.Xml.Serialization;
 
     [Serializable()]
-    public partial class RGBColorType : IXmlSerializable
+    public partial class RgbColorType : IXmlSerializable
     {
         public byte R { get; set; }
 

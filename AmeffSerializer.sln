@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmeffSerializer", "AmeffSerializer\AmeffSerializer.csproj", "{3AAAAF3E-F4EF-46A6-ABFE-121A732E877B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAmeffSerializer", "TestAmeffSerializer\TestAmeffSerializer.csproj", "{9DAC946C-97EC-403D-8A71-9458350BDE14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAmeffSerializer", "TestAmeffSerializer\TestAmeffSerializer.csproj", "{9DAC946C-97EC-403D-8A71-9458350BDE14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

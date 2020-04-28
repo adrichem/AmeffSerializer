@@ -89,8 +89,10 @@ namespace TestAmeffSerializer.V31
         [AssemblyInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
-            Schemas = new XmlSchemaSet();
-            Schemas.XmlResolver = new XmlUrlResolver();
+            Schemas = new XmlSchemaSet
+            {
+                XmlResolver = new XmlUrlResolver()
+            };
             Schemas.Add(null, "http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd");
             Schemas.Add(null, "http://www.opengroup.org/xsd/archimate/3.1/archimate3_View.xsd");
             Schemas.Add(null, "http://www.opengroup.org/xsd/archimate/3.1/archimate3_Diagram.xsd");
@@ -113,7 +115,7 @@ namespace TestAmeffSerializer.V31
             );
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
-            Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+            Assert.IsFalse(ValidationIssues.Any(), string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
             Assert.IsTrue(Result.Model.Any.Count == 0);
             Assert.IsTrue(Result.Model.AnyAttr.Count == 0);
             Assert.IsTrue(Result.Model.Documentation.Count == 0);
@@ -151,7 +153,7 @@ namespace TestAmeffSerializer.V31
             );
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
-            Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+            Assert.IsFalse(ValidationIssues.Any(), string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
             Assert.AreEqual(ExpectedLanguage1, Result.Model.Documentation.First().Lang);
             Assert.AreEqual(ExpectedDocumentation1, Result.Model.Documentation.First().Value);
             Assert.AreEqual(ExpectedLanguage2, Result.Model.Documentation.Last().Lang);
@@ -182,8 +184,8 @@ namespace TestAmeffSerializer.V31
                     {
                         new SchemaInfoType
                         {
-                            schema = "schema1" ,
-                            schemaversion = "1",
+                            Schema = "schema1" ,
+                            SchemaVersion = "1",
                             Any = new List<XmlElement>
                             {
                                 ExpectedTitle,
@@ -203,14 +205,14 @@ namespace TestAmeffSerializer.V31
             Stream Buffer = Serialize(MyModel, TempFileName(string.Empty));
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
-            Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+            Assert.IsFalse(ValidationIssues.Any(), string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
             Assert.IsTrue(Result.Model.Metadata.Items.Count() == 1);
 
             SchemaInfoType ActualItem1 = Result.Model.Metadata.Items.First() as SchemaInfoType;
-            XmlElement ActualTitle = ActualItem1.Any.First() as XmlElement;
-            XmlElement ActualCreator = ActualItem1.Any.Skip(1).First() as XmlElement;
-            Assert.IsTrue(ActualItem1.schema == "schema1");
-            Assert.IsTrue(ActualItem1.schemaversion == "1");
+            XmlElement ActualTitle = ActualItem1.Any.First();
+            XmlElement ActualCreator = ActualItem1.Any.Skip(1).First();
+            Assert.IsTrue(ActualItem1.Schema == "schema1");
+            Assert.IsTrue(ActualItem1.SchemaVersion == "1");
             Assert.IsTrue(ActualTitle.InnerText == ExpectedTitle.InnerText);
             Assert.IsTrue(ActualCreator.InnerText == ExpectedCreator.InnerText);
         }
@@ -255,7 +257,7 @@ namespace TestAmeffSerializer.V31
             Stream Buffer = Serialize(MyModel, TempFileName(string.Empty));
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
-            Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+            Assert.IsFalse(ValidationIssues.Any(), string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
             Assert.IsTrue(Result.Model.Metadata.Items.Count() == 4);
 
             string ActualSchema = Result.Model.Metadata.Items.First() as string;
@@ -420,8 +422,8 @@ namespace TestAmeffSerializer.V31
                 , TempFileName(string.Empty)
             );
 
-            var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
-            Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+            Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
+            Assert.IsFalse(ValidationIssues.Any(), string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
 
         }
 
@@ -494,11 +496,11 @@ namespace TestAmeffSerializer.V31
             );
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
-            Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
-            Assert.IsTrue(Result.Model.Organizations.Count() == 2);
-            Assert.IsTrue(Result.Model.Organizations.First().Item.Count() == 7);
-            Assert.IsTrue(Result.Model.Organizations.First().Item.Last().Item.Count() == 2);
-            Assert.IsTrue(Result.Model.Organizations.Last().Item.Count() == 2);
+            Assert.IsFalse(ValidationIssues.Any(), string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+            Assert.IsTrue(Result.Model.Organizations.Count == 2);
+            Assert.IsTrue(Result.Model.Organizations.First().Item.Count == 7);
+            Assert.IsTrue(Result.Model.Organizations.First().Item.Last().Item.Count == 2);
+            Assert.IsTrue(Result.Model.Organizations.Last().Item.Count == 2);
         }
 
         [TestMethod]
@@ -597,8 +599,8 @@ namespace TestAmeffSerializer.V31
                 },
                 AllowedRelationshipTypes = new List<AllowedRelationshipTypeType>
                 {
-                    new AllowedRelationshipTypeType { Type = RelationshipTypeEnum.Composition},
-                    new AllowedRelationshipTypeType { Type = RelationshipTypeEnum.Association}
+                    new AllowedRelationshipTypeType { Type = AllowedRelationshipType.Composition},
+                    new AllowedRelationshipTypeType { Type = AllowedRelationshipType.Association}
                 }
             };
 
@@ -653,8 +655,8 @@ namespace TestAmeffSerializer.V31
                 , TempFileName(string.Empty)
             );
 
-            var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
-            Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+            Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
+            Assert.IsFalse(ValidationIssues.Any(), string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
         }
 
         [TestMethod]
@@ -697,13 +699,13 @@ namespace TestAmeffSerializer.V31
                                         H = 301,
                                         Style = new StyleType
                                         {
-                                            FillColor = new RGBColorType
+                                            FillColor = new RgbColorType
                                             {
                                                 R = 209,
                                                 G = 209,
                                                 B = 207,
                                             },
-                                            LineColor = new RGBColorType
+                                            LineColor = new RgbColorType
                                             {
                                                 R = 255,
                                                 G = 0,
@@ -712,7 +714,7 @@ namespace TestAmeffSerializer.V31
                                             LineWidth = "5",
                                             Font = new FontType
                                             {
-                                                Color = new RGBColorType
+                                                Color = new RgbColorType
                                                 {
                                                     R = 255,
                                                     G = 255,
@@ -720,7 +722,7 @@ namespace TestAmeffSerializer.V31
                                                 },
                                                 Name = "Lato",
                                                 Size = 13.5M,
-                                                Style = new List<FontStyleEnum> { FontStyleEnum.bold, FontStyleEnum.italic, FontStyleEnum.underline }
+                                                Style = new List<FontStyle> { FontStyle.bold, FontStyle.italic, FontStyle.underline }
                                             }
                                         },
                                         Nodes = new List<ViewNodeType>
@@ -735,7 +737,7 @@ namespace TestAmeffSerializer.V31
                                                 ElementRef = "actor1",
                                                 Style = new StyleType
                                                 {
-                                                    FillColor = new RGBColorType
+                                                    FillColor = new RgbColorType
                                                     {
                                                         R = 252,
                                                         G = 193,
@@ -744,7 +746,7 @@ namespace TestAmeffSerializer.V31
                                                     },
                                                     Font = new FontType
                                                     {
-                                                        Color = new RGBColorType
+                                                        Color = new RgbColorType
                                                         {
                                                             R = 0,
                                                             G = 0,
@@ -815,8 +817,8 @@ namespace TestAmeffSerializer.V31
 
 
             var Buffer = Serialize(MyModel, TempFileName(string.Empty));
-            var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
-            Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+            Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
+            Assert.IsFalse(ValidationIssues.Any(), string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
         }
 
         [TestMethod]
@@ -844,7 +846,7 @@ namespace TestAmeffSerializer.V31
             );
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
-            Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+            Assert.IsFalse(ValidationIssues.Any(), string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
             Assert.IsTrue(Result.Model.Relationships.OfType<Association>().First().IsDirected);
             Assert.IsFalse(Result.Model.Relationships.OfType<Association>().Last().IsDirected);
             Assert.IsFalse(Result.Xml.Contains("isDirected=\"false\""));
@@ -867,7 +869,7 @@ namespace TestAmeffSerializer.V31
                     },
                     Relationships = new List<RelationshipType>
                     {
-                        new Access { Identifier = "access1", Source= "actor1", Target = "object1", AccessType = AccessTypeEnum.ReadWrite },
+                        new Access { Identifier = "access1", Source= "actor1", Target = "object1", AccessType = AccessType.ReadWrite },
                         new Access { Identifier = "access2", Source= "actor1", Target = "object1" },
                     }
                 }
@@ -875,9 +877,9 @@ namespace TestAmeffSerializer.V31
             );
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
-            Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
-            Assert.IsTrue(Result.Model.Relationships.OfType<Access>().First().AccessType == AccessTypeEnum.ReadWrite);
-            Assert.IsTrue(Result.Model.Relationships.OfType<Access>().Last().AccessType == AccessTypeEnum.Access);
+            Assert.IsFalse(ValidationIssues.Any(), string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+            Assert.IsTrue(Result.Model.Relationships.OfType<Access>().First().AccessType == AccessType.ReadWrite);
+            Assert.IsTrue(Result.Model.Relationships.OfType<Access>().Last().AccessType == AccessType.Access);
             Assert.IsTrue(Result.Xml.Contains("accessType=\"ReadWrite\""));
             Assert.IsFalse(Result.Xml.Contains("accessType=\"Access\""));
         }
@@ -907,7 +909,7 @@ namespace TestAmeffSerializer.V31
             );
 
             var Result = Deserialize<ModelType>(Buffer, MyXmlReaderSettings);
-            Assert.IsTrue(ValidationIssues.Count == 0, string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
+            Assert.IsFalse(ValidationIssues.Any(), string.Join("\n", ValidationIssues.Select(i => i.Exception.ToString())));
             Assert.IsTrue(Result.Model.Relationships.OfType<Influence>().First().Modifier == "++");
             Assert.IsTrue(Result.Model.Relationships.OfType<Influence>().Last().Modifier == null);
             Assert.IsTrue(Result.Xml.Contains("modifier=\"++\""));
@@ -920,7 +922,7 @@ namespace TestAmeffSerializer.V31
             var ValidationIssues = new List<ValidationEventArgs>();
             var MyXmlReaderSettings = ReaderSettings(ValidationIssues);
             var Buffer = Serialize(
-                new RGBColorType
+                new RgbColorType
                 {
                     R = 255,
                     G = 254,
@@ -929,12 +931,12 @@ namespace TestAmeffSerializer.V31
                 TempFileName("1")
             );
 
-            var Result = Deserialize<RGBColorType>(Buffer, MyXmlReaderSettings);
+            var Result = Deserialize<RgbColorType>(Buffer, MyXmlReaderSettings);
             var Errors = ValidationIssues
                      .Where(i => i.Severity == XmlSeverityType.Error)
                      .Select(i => i.Exception.ToString())
             ;
-            Assert.IsTrue(Errors.Count() == 0, string.Join("\n",Errors));
+            Assert.IsFalse(Errors.Any(), string.Join("\n",Errors));
             Assert.AreEqual(255, Result.Model.R);
             Assert.AreEqual(254, Result.Model.G);
             Assert.AreEqual(0, Result.Model.B);
@@ -942,7 +944,7 @@ namespace TestAmeffSerializer.V31
             Assert.IsFalse(Result.Xml.Contains("a=\""));
 
             Buffer = Serialize(
-                new RGBColorType
+                new RgbColorType
                 {
                     R = 255,
                     G = 254,
@@ -951,12 +953,12 @@ namespace TestAmeffSerializer.V31
                 },
                 TempFileName("2")
             );
-            Result = Deserialize<RGBColorType>(Buffer, MyXmlReaderSettings);
+            Result = Deserialize<RgbColorType>(Buffer, MyXmlReaderSettings);
             Errors = ValidationIssues
                      .Where(i => i.Severity == XmlSeverityType.Error)
                      .Select(i => i.Exception.ToString())
             ;
-            Assert.IsTrue(Errors.Count() == 0, string.Join("\n", Errors));
+            Assert.IsFalse(Errors.Any(), string.Join("\n", Errors));
             Assert.AreEqual(255, Result.Model.R);
             Assert.AreEqual(254, Result.Model.G);
             Assert.AreEqual(0, Result.Model.B);

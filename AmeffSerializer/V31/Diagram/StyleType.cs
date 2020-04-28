@@ -7,10 +7,10 @@
     public partial class StyleType
     {
         [XmlElement("lineColor")]
-        public RGBColorType LineColor { get; set; }
+        public RgbColorType LineColor { get; set; }
 
         [XmlElement("fillColor")]
-        public RGBColorType FillColor { get; set; }
+        public RgbColorType FillColor { get; set; }
 
         [XmlElement("font")]
         public FontType Font { get; set; }
